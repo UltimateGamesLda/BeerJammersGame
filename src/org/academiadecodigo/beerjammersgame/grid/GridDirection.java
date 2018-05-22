@@ -2,5 +2,7 @@ package org.academiadecodigo.beerjammersgame.grid;
 
 public enum GridDirection {
     UP,
-    DOWN;
+    DOWN,
+    LEFT,
+    RIGHT;
 }

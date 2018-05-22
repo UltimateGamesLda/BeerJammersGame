@@ -4,8 +4,12 @@ public class GridPosition {
     private int x;
     private int y;
 
-    public void moveUp(){}
+    public void moveUp(){
 
-    public void moveDown(){}
+    }
+
+    public void moveDown(){
+
+    }
 
 }
