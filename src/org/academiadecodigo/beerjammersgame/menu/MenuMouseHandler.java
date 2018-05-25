@@ -8,8 +8,10 @@ public class MenuMouseHandler implements MouseHandler {
 
     //Rectangle initMenu = new Rectangle(50, 50, 50, 50);
 
-    Picture initMenu = new Picture(10,10, "./BeerJammersMenuInit.png");
-    Picture selectMenu = new Picture(10,10, "./BeerJammersMenuInit.png");
+    private Picture initMenu = new Picture(10,10, "./BeerJammersMenuInit.png");
+    private Picture selectMenu = new Picture(10,10, "./BeerJammersMenuInit.png");
+    private Boolean initMenuB = true;
+    private Boolean selectMenuB = false;
 
     public MenuMouseHandler() {
 
@@ -25,8 +27,9 @@ public class MenuMouseHandler implements MouseHandler {
     @Override
     public void mouseClicked(MouseEvent e) {
         //System.out.println(e);
-        if(e.getX() >= 520 && e.getX() <= 980 && e.getY() >= (530) && e.getY() <= (700)){
+        if(e.getX() >= 520 && e.getX() <= 980 && e.getY() >= (530) && e.getY() <= (700) && initMenuB == true){
             System.out.println("You press Start Button");
+            initMenuB = false;
             selectMenu.draw();
             initMenu.delete();
         }
