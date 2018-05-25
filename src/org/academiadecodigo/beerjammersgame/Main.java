@@ -1,7 +1,6 @@
 package org.academiadecodigo.beerjammersgame;
 
 import org.academiadecodigo.beerjammersgame.menu.Menu;
-import org.academiadecodigo.beerjammersgame.menu.Song;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import java.io.File;
 
@@ -13,8 +12,8 @@ public class Main {
         Rectangle screen = new Rectangle(10, 10, 1500, 900);
         screen.draw();
 
-        File music = new File("./MenuSong.mp3");
-        Song.PlaySound(music);
+        Sound song = new Sound("/resources/GameSong.wav");
+        //song.play(true);
 
         menu.init();
     }
