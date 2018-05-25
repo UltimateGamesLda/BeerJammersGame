@@ -1,7 +1,9 @@
 package org.academiadecodigo.beerjammersgame;
 
 import org.academiadecodigo.beerjammersgame.menu.Menu;
+import org.academiadecodigo.beerjammersgame.menu.Song;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import java.io.File;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,8 +13,16 @@ public class Main {
         Rectangle screen = new Rectangle(10, 10, 1500, 900);
         screen.draw();
 
+        File music = new File("./MenuSong.mp3");
+        Song.PlaySound(music);
+
         menu.init();
+    }
 
-
+    public static void endMenu(String[] players){
+        System.out.println(players[0]);
+        System.out.println(players[1]);
+        Game game = new Game();
+        game.gameStart();
     }
 }
