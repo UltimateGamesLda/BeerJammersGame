@@ -2,7 +2,6 @@ package org.academiadecodigo.beerjammersgame;
 
 import org.academiadecodigo.beerjammersgame.menu.Menu;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
-import java.io.File;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,7 +12,7 @@ public class Main {
         screen.draw();
 
         Sound song = new Sound("/resources/GameSong.wav");
-        //song.play(true);
+        song.play(true);
 
         menu.init();
     }
