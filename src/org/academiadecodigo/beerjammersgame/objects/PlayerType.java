@@ -1,6 +1,7 @@
 package org.academiadecodigo.beerjammersgame.objects;
 
 public enum PlayerType {
+
     ADRIANO(15, 20, 10, "/SmallSkins/Adriano.png"),
     ALEXANDRE(20, 10, 15, "/SmallSkins/Alexandre.png"),
     ALFREDO(15, 20, 15, "/SmallSkins/Alfredo.png"),
@@ -35,15 +36,15 @@ public enum PlayerType {
 
     }
 
-    public int getBeerCapacity(PlayerType name) {
-        return name.beerCapacity;
+    public int getBeerCapacity() {
+        return this.beerCapacity;
     }
 
-    public int getSpeed(PlayerType name){
-        return name.speed;
+    public int getSpeed(){
+        return this.speed;
     }
 
-    public int getStrength(PlayerType name) { return name.strength; }
+    public int getStrength() { return this.strength; }
 
-    public String geturlImage(PlayerType name){ return name.urlImage; }
+    public String geturlImage(){ return this.urlImage; }
 }

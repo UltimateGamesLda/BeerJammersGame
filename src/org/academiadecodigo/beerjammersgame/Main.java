@@ -15,13 +15,9 @@ public class Main {
         Sound song = new Sound("/resources/GameSong.wav");
         song.play(true);
 
-        menu.init();
-    }
+        PlayerType[] players = menu.init();
 
-    public static void endMenu(String[] players){
-        System.out.println(players[0]);
-        System.out.println(players[1]);
         Game game = new Game();
-        game.gameStart();
+        game.gameStart(players);
     }
 }
