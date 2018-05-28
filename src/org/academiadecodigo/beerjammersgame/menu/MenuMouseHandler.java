@@ -4,7 +4,6 @@ import org.academiadecodigo.beerjammersgame.Main;
 import org.academiadecodigo.simplegraphics.mouse.*;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-import java.util.ConcurrentModificationException;
 
 
 public class MenuMouseHandler implements MouseHandler {
@@ -25,11 +24,10 @@ public class MenuMouseHandler implements MouseHandler {
 
     public MenuMouseHandler() {
         m.addEventListener(MouseEventType.MOUSE_CLICKED);
-        m.addEventListener(MouseEventType.MOUSE_MOVED);
+        //m.addEventListener(MouseEventType.MOUSE_MOVED);
 
         //initMenu.setColor(Color.RED);
         initMenu.draw();
-        start();
     }
 
     public void start(){

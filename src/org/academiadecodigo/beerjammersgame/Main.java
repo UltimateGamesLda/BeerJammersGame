@@ -1,6 +1,7 @@
 package org.academiadecodigo.beerjammersgame;
 
 import org.academiadecodigo.beerjammersgame.menu.Menu;
+import org.academiadecodigo.beerjammersgame.objects.PlayerType;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class Main {
