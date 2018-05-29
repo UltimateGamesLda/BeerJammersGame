@@ -56,7 +56,7 @@ public class MenuMouseHandler implements MouseHandler {
                 if (next) {
 
                     player2Logo.draw();
-                    player2Logo.grow(-40, -40);
+                    player2Logo.grow(-10, -10);
                     player1Logo.delete();
                     playerCount++;
 
@@ -66,7 +66,7 @@ public class MenuMouseHandler implements MouseHandler {
                         selectMenu.delete();
 
                         m.removeEventListener(MouseEventType.MOUSE_CLICKED);
-                        m.removeEventListener(MouseEventType.MOUSE_MOVED);
+                        //m.removeEventListener(MouseEventType.MOUSE_MOVED);
 
                         end = true;
                     }
