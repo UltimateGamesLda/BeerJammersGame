@@ -37,7 +37,6 @@ public class Ball implements Drawable {
         this.vertDirection = Direction.getOpposite(vertDirection);
     }
 
-
     public void changeHorizDirection() {
         this.horizDirection = Direction.getOpposite(horizDirection);
     }
@@ -78,6 +77,14 @@ public class Ball implements Drawable {
 
     public Direction getVertDirection() {
         return vertDirection;
+    }
+
+    public void setHorizDirection(Direction direction){
+        horizDirection = direction;
+    }
+
+    public void setVertDirection(Direction direction){
+        vertDirection = direction;
     }
 
     public int getVelocity() {

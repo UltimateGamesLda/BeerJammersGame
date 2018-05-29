@@ -93,7 +93,6 @@ public class PlayerKeyboardHandler implements KeyboardHandler {
                 break;
             case KeyboardEvent.KEY_L:
                 player1.launchBall();
-                player1.drawInField();
                 break;
             case KeyboardEvent.KEY_W:
                 player2.setDistance(Direction.UP);
@@ -112,8 +111,7 @@ public class PlayerKeyboardHandler implements KeyboardHandler {
                 player2.drawInField();
                 break;
             case KeyboardEvent.KEY_SPACE:
-                player1.launchBall();
-                player2.drawInField();
+                player2.launchBall();
                 break;
 
         }

@@ -4,6 +4,8 @@ import org.academiadecodigo.beerjammersgame.field.Direction;
 import org.academiadecodigo.beerjammersgame.field.Drawable;
 import org.academiadecodigo.beerjammersgame.field.Field;
 import org.academiadecodigo.beerjammersgame.field.Position;
+import org.academiadecodigo.beerjammersgame.keyboard.PlayerKeyboardHandler;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 
 public class Player extends GameObject implements Drawable {
 
@@ -12,11 +14,16 @@ public class Player extends GameObject implements Drawable {
     private int velocity;
     private boolean haveBall = false;
     private boolean launch = false;
+    private Direction sendBallDirection;
+    private PlayerKeyboardHandler playerKeyboardHandler;
+    private Ball ball;
 
-    public Player(Field field, int x) {
+
+    public Player(Field field, int x, Ball ball) {
         this.field = field;
         this.velocity = 100;
         pos = new Position(this.field, x, field.getYPlayer(), field.getPlayerWidth(), field.getPlayerHeight());
+        this.ball = ball;
     }
 
 
@@ -44,17 +51,14 @@ public class Player extends GameObject implements Drawable {
                     break;
             }
         } else {
+
             switch (direction) {
                 case UP:
-                    if(launch){
-                        haveBall = false;
-                        setDistance(Direction.UP);
-                    }
+                    sendBallDirection = direction.UP;
+                    System.out.println("Hello");
                 case DOWN:
-                    if(launch){
-                        haveBall = false;
-                        setDistance(Direction.DOWN);
-                    }
+                    sendBallDirection = direction.DOWN;
+                    System.out.println("Hello");
             }
         }
     }
@@ -65,8 +69,33 @@ public class Player extends GameObject implements Drawable {
     }
 
 
-    public void launchBall() {
-        launch = true;
+    private void sendBall(Direction direction) {
+
+        if(direction == Direction.UP) {
+            ball.setVertDirection(Direction.UP);
+            ball.changeHorizDirection();
+        }
+
+        if(direction == Direction.DOWN) {
+            ball.setVertDirection(Direction.DOWN);
+            ball.changeHorizDirection();
+        }
+
+        launch = false;
+        haveBall = false;
+        sendBallDirection = null;
+
+    }
+
+    public void launchBall(){
+
+        if(haveBall == true) {
+            launch = true;
+        }
+
+        if(launch && sendBallDirection != null){
+            sendBall(sendBallDirection);
+        }
     }
 
     public void setHaveBall(boolean state) {

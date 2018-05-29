@@ -66,14 +66,15 @@ public class Position {
 
     }
 
-    public void set(){
-        if(rectangle != null) {
-            rectangle.delete();
-            rectangle.draw();
-        } else {
-            picture.delete();
-            picture.draw();
-        }
+    public void set(double newX, double newY){
+        double previousX = x;
+        double previousY = y;
+        x = (int) newX;
+        y = (int) newY;
+        picture.translate(newX - previousX, newY - previousY);
+
+
+
     }
 
     public int getDistanceX() {

@@ -4,6 +4,7 @@ import org.academiadecodigo.beerjammersgame.GameObjects.Ball;
 import org.academiadecodigo.beerjammersgame.GameObjects.Player;
 import org.academiadecodigo.beerjammersgame.field.Collision;
 import org.academiadecodigo.beerjammersgame.field.Field;
+import org.academiadecodigo.beerjammersgame.field.Position;
 import org.academiadecodigo.beerjammersgame.keyboard.PlayerKeyboardHandler;
 
 public class Game {
@@ -18,9 +19,9 @@ public class Game {
 
     public Game() {
         this.field = new Field();
-        this.player1 = new Player(this.field, field.getXPlayer1());
-        this.player2 = new Player(this.field, field.getXPlayer2());
         this.ball = new Ball(this.field, this.field.PADDINGX);
+        this.player1 = new Player(this.field, field.getXPlayer1(), ball);
+        this.player2 = new Player(this.field, field.getXPlayer2(), ball);
         this.collision = new Collision(this.field, this.player1, this.player2, this.ball);
         new PlayerKeyboardHandler(this.player1, this.player2);
 
@@ -84,17 +85,13 @@ public class Game {
         if (player1CheckX() && player1CheckY() && !player1.gethaveBall()) {
             System.out.println("Player 1 Catch ball");
             player1.setHaveBall(true);
-            ball.getPos().setX(player1.getPos().getX() + field.getPlayerWidth() + 25);
-            ball.getPos().setY(player1.getPos().getY() + (field.getPlayerHeight() / 2));
-            ball.getPos().set();
+            ball.getPos().set((player1.getPos().getX() + field.getPlayerWidth() + 10), (player1.getPos().getY() + (field.getPlayerHeight() / 2)));
         }
 
-        if (player2CheckX() && player2CheckY() && !player1.gethaveBall()) {
+        if (player2CheckX() && player2CheckY() && !player2.gethaveBall()) {
             System.out.println("Player 2 Catch ball");
-            player1.setHaveBall(true);
-            ball.getPos().setX(player1.getPos().getX() - 25);
-            ball.getPos().setY(player1.getPos().getY() + (field.getPlayerHeight() / 2));
-            ball.getPos().set();
+            player2.setHaveBall(true);
+            ball.getPos().set((player2.getPos().getX() - 55), (player2.getPos().getY() + (field.getPlayerHeight() / 2)));
         }
     }
 

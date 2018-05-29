@@ -21,7 +21,6 @@ public class Collision {
         if(!checkColision(ball.getHorizDirection(),ball.getVertDirection())){
             ball.toNextPos();
         }
-
     }
 
     public void collidesGoals1(){
