@@ -28,7 +28,7 @@ public enum PlayerType {
 
         this.strength = strength;
 
-        this.speed = speed;
+        this.speed = speed * 2;
 
         this.beerCapacity = beerCapacity;
 
