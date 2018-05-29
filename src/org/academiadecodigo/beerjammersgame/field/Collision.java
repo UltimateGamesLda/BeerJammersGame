@@ -8,89 +8,81 @@ public class Collision {
     private Player player1;
     private Player player2;
     private Ball ball;
+    private boolean player1Turn;
+    private boolean player2Turn;
+    private boolean goal;
 
     public Collision(Field field, Player player1, Player player2, Ball ball){
         this.field = field;
         this.player1 = player1;
         this.player2 = player2;
         this.ball = ball;
+        this.player1Turn =false;
+        this.player2Turn =false;
+        this.goal=false;
     }
 
     public void check(){
-        //while it hasn't collide
-        if(!checkColision(ball.getHorizDirection(),ball.getVertDirection())){
-            ball.toNextPos();
-        }
+        fieldCollision(ball.getVertDirection());
+        ball.toNextPos();
     }
 
-    public void collidesGoals1(){
-        if(ball.getPos().getX() <= field.PADDINGX + field.getGoalSize()){
-            System.out.println("TOUCOU NA BALIZA1");
+    public boolean hasGoal() {
+
+        if ((ball.getPos().getX() + ball.getSize()) < field.getPaddingX() || (ball.getPos().getX() + ball.getSize()) > (Field.WIDTH + field.PADDINGX)) {
+            return true;
+        }
+        return false;
+    }
+
+    public void fieldCollision(Direction currentDirection) {
+
+        /**check collision in left side of field */
+        if (ball.getPos().getX() <= (field.WIDTH / 2) + field.PADDINGX) {
+            this.player1Turn=true;
+            this.player2Turn= false;
+            verticalMovement(currentDirection);
+
+        }
+        /**check collision in right side of field */
+        if (ball.getPos().getX() >= (field.WIDTH / 2) + field.PADDINGX) {
+            this.player1Turn=false;
+            this.player2Turn=true;
+            verticalMovement(currentDirection);
+        }
+        /** check collision exactly in middle of field*/
+        if (ball.getPos().getX() == (field.WIDTH / 2) + field.PADDINGX) {
+            verticalMovement(currentDirection);
         }
 
     }
 
+    private void verticalMovement(Direction currVerticalDir) {
 
-    private boolean checkColision(Direction horizDirection, Direction vertDirection) {
-        boolean collision = false;
-        switch (vertDirection) {
+        switch (currVerticalDir) {
+
             case UP:
-                //verifica limite sup
+                //if the ball are in top limit change direction to
                 if (ball.isOnTopLimit()) {
                     ball.toTopLimit();
                     ball.changeVertDirection();
-                    collision = true;
                 }
-                //verifica se está a bater na parte inf do player
-                //muda de direção
                 break;
-
             case DOWN:
-                //verifica limite inf
-                //se estiver no limite inferior
                 if (ball.isOnBottomLimit()) {
                     ball.toBottomLimit();
                     ball.changeVertDirection();
-                    collision =  true;
                 }
-
-                //verifica se bate em cima do player
-                //muda de direção
                 break;
         }
 
-        switch (horizDirection) {
-            case LEFT:
-                //verifica lim. esq
-                if (ball.isOnLeftLimit()) {
-                    ball.toLeftLimit();
-                    ball.changeHorizDirection();
-                    collision = true;
-                }
-                //verifica se bate no lado direito do player 1
-                //muda de direção
-                //verifica se bate no lado direito das balizas 1
-                //muda de direção
-                break;
-            case RIGHT:
-                //se estiver no limite direito
-                if (ball.isOnRightLimit()) {
-                    ball.toRightLimit();
-                    ball.changeHorizDirection();
-                    collision =true;
-                }
-                //verifica se bate no lado direito do player 2
-                //muda de direção
-                //verifica se bate no lado direito das balizas 2
-                //muda de direção
-                break;
-        }
 
-        if(!collision){
-
-        }
-        return collision;
+    }
+    public boolean getPlayer1Turn(){
+        return player1Turn;
     }
 
-
+    public boolean getPlayer2Turn(){
+        return player2Turn;
+    }
 }

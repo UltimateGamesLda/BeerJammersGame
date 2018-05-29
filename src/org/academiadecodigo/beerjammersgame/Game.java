@@ -53,34 +53,40 @@ public class Game {
         int previousplayer2DrinkedBears = player2DrinkedBears;
         int previousplayer1DrinkedBears = player1DrinkedBears;
 
-        if (ball.getPos().getX() + ball.getSize() == field.getPaddingX() + field.getWidth()) {
-            if (ball.getPos().getY() > field.getPaddingY() && ball.getPos().getY() < field.getPaddingY() + 193) {
-                player2DrinkedBears += 3;
-                System.out.println("3");
-            } else if (ball.getPos().getY() > field.getPaddingY() + 193 && ball.getPos().getY() < field.getPaddingY() + 387) {
-                player2DrinkedBears += 5;
-                System.out.println("5");
-            } else {
-                player2DrinkedBears += 3;
+            /** check if the ball touch in right limit*/
+            if (collision.getPlayer2Turn() && collision.hasGoal()) {
+                System.out.println("adsadasa");
+                if (ball.getPos().getY() > field.getPaddingY() && ball.getPos().getY() < field.getPaddingY() + 193) {
+                    player2DrinkedBears += 3;
+                    System.out.println("3");
+                } else if (ball.getPos().getY() > field.getPaddingY() + 193 && ball.getPos().getY() < field.getPaddingY() + 387) {
+                    player2DrinkedBears += 5;
+                    System.out.println("5");
+                } else {
+                    player2DrinkedBears += 3;
+                }
+                System.out.println("Player 1 Goal");
             }
-            System.out.println("Player 1 Goal");
-        }
 
-        if (ball.getPos().getX() == field.getPaddingX()) {
-            if (ball.getPos().getY() > field.getPaddingY() && ball.getPos().getY() < field.getPaddingY() + 193) {
-                player1DrinkedBears += 3;
-                System.out.println("3");
-            } else if (ball.getPos().getY() > field.getPaddingY() + 193 && ball.getPos().getY() < field.getPaddingY() + 387) {
-                player1DrinkedBears += 5;
-                System.out.println("5");
-            } else {
-                player1DrinkedBears += 3;
+            /** check if the ball touch in left limit */
+            if (collision.getPlayer1Turn() && collision.hasGoal()) {
+                System.out.println("adsadasa");
+                if (ball.getPos().getY() > field.getPaddingY() && ball.getPos().getY() < field.getPaddingY() + 193) {
+                    player1DrinkedBears += 3;
+                    System.out.println("3");
+                } else if (ball.getPos().getY() > field.getPaddingY() + 193 && ball.getPos().getY() < field.getPaddingY() + 387) {
+                    player1DrinkedBears += 5;
+                    System.out.println("5");
+                } else {
+                    player1DrinkedBears += 3;
+                }
+                System.out.println("Player 2 Goal");
             }
-            System.out.println("Player 2 Goal");
-        }
+
 
         if(player1DrinkedBears != previousplayer1DrinkedBears || player2DrinkedBears != previousplayer2DrinkedBears){
             drink.play(true);
+            ball.getPos().set(Field.PADDINGX + (Field.WIDTH / 2), Field.PADDINGY + Field.HEIGHT - 50);
         }
     }
 

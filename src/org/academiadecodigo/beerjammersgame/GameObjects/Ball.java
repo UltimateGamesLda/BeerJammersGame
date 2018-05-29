@@ -22,7 +22,9 @@ public class Ball implements Drawable {
         this.velocity = 10;
         this.size = 40;
         //pos = new Position(this.field, x, this.field.PADDINGX, size, size);
-        pos = new Position(this.field,x,this.field.PADDINGX, ballURL);
+        pos = new Position(this.field,Field.PADDINGX + (Field.WIDTH / 2), Field.PADDINGY + Field.HEIGHT - 300, ballURL);
+        System.out.println(Field.PADDINGX + (Field.WIDTH / 2));
+        System.out.println(Field.PADDINGY + Field.HEIGHT - 300);
         this.vertDirection = Direction.DOWN;
         this.horizDirection = Direction.RIGHT;
     }
