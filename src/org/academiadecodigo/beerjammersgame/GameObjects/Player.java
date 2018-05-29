@@ -55,10 +55,12 @@ public class Player extends GameObject implements Drawable {
             switch (direction) {
                 case UP:
                     sendBallDirection = direction.UP;
-                    System.out.println("Hello");
+                    System.out.println("PHELLO");
+                    break;
                 case DOWN:
                     sendBallDirection = direction.DOWN;
-                    System.out.println("Hello");
+                    System.out.println("DOWN");
+                    break;
             }
         }
     }
@@ -94,7 +96,7 @@ public class Player extends GameObject implements Drawable {
         }
 
         if(launch && sendBallDirection != null){
-            sendBall(sendBallDirection);
+            sendBall((sendBallDirection));
         }
     }
 
