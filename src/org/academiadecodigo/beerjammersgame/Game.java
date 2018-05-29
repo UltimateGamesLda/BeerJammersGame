@@ -7,6 +7,9 @@ import org.academiadecodigo.beerjammersgame.field.Field;
 import org.academiadecodigo.beerjammersgame.field.Position;
 import org.academiadecodigo.beerjammersgame.keyboard.PlayerKeyboardHandler;
 import org.academiadecodigo.beerjammersgame.objects.PlayerType;
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Text;
+
 
 public class Game {
 
@@ -18,6 +21,10 @@ public class Game {
     private int player1DrinkedBears;
     private int player2DrinkedBears;
     private Sound drink = new Sound("/resources/Drink.wav");
+    private Text player1Score;
+    private Text player2Score;
+    private String p1Score;
+    private String p2Score;
 
     public Game(PlayerType[] players) {
 
@@ -27,7 +34,18 @@ public class Game {
         this.player2 = new Player(this.field, field.getXPlayer2(), players[1], ball);
         this.collision = new Collision(this.field, this.player1, this.player2, this.ball);
         new PlayerKeyboardHandler(this.player1, this.player2);
+        this.p1Score = "0";
+        this.player1Score = new Text((double)((Field.WIDTH)/2)+Field.PADDINGX -100,(double)(Field.PADDINGX/2)+15,p1Score);
+        this.p2Score = "0";
+        this.player2Score = new Text((double)((Field.WIDTH)/2)+Field.PADDINGX +100,(double)(Field.PADDINGX/2)+15,p1Score);
 
+        player1Score.draw();
+        player1Score.grow(30,30);
+        player1Score.setColor(Color.RED);
+
+        player2Score.draw();
+        player2Score.grow(30,30);
+        player2Score.setColor(Color.RED);
     }
 
     public void start() throws InterruptedException {
@@ -38,6 +56,8 @@ public class Game {
             if(!player1.gethaveBall() && !player2.gethaveBall()) {
 
                 ball.drawInField();
+
+
 
                 collision.check();
 
@@ -53,11 +73,15 @@ public class Game {
         int previousplayer2DrinkedBears = player2DrinkedBears;
         int previousplayer1DrinkedBears = player1DrinkedBears;
 
+
+
             /** check if the ball touch in right limit*/
             if (collision.getPlayer2Turn() && collision.hasGoal()) {
-                System.out.println("adsadasa");
+
                 if (ball.getPos().getY() > field.getPaddingY() && ball.getPos().getY() < field.getPaddingY() + 193) {
                     player2DrinkedBears += 3;
+
+
                     System.out.println("3");
                 } else if (ball.getPos().getY() > field.getPaddingY() + 193 && ball.getPos().getY() < field.getPaddingY() + 387) {
                     player2DrinkedBears += 5;
@@ -66,11 +90,12 @@ public class Game {
                     player2DrinkedBears += 3;
                 }
                 System.out.println("Player 1 Goal");
+
             }
 
             /** check if the ball touch in left limit */
             if (collision.getPlayer1Turn() && collision.hasGoal()) {
-                System.out.println("adsadasa");
+
                 if (ball.getPos().getY() > field.getPaddingY() && ball.getPos().getY() < field.getPaddingY() + 193) {
                     player1DrinkedBears += 3;
                     System.out.println("3");
@@ -88,6 +113,11 @@ public class Game {
             drink.play(true);
             ball.getPos().set(Field.PADDINGX + (Field.WIDTH / 2), Field.PADDINGY + Field.HEIGHT - 50);
         }
+        String p1Score= Integer.toString(player1DrinkedBears);
+        String p2Score = Integer.toString(player2DrinkedBears);
+
+        player1Score.setText(p1Score);
+        player2Score.setText(p2Score);
     }
 
     private void checkCatch() {
