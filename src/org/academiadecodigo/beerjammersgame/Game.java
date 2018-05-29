@@ -59,11 +59,14 @@ public class Game {
                 if (ball.getPos().getY() > field.getPaddingY() && ball.getPos().getY() < field.getPaddingY() + 193) {
                     player2DrinkedBears += 3;
                     System.out.println("3");
+
                 } else if (ball.getPos().getY() > field.getPaddingY() + 193 && ball.getPos().getY() < field.getPaddingY() + 387) {
                     player2DrinkedBears += 5;
                     System.out.println("5");
+
                 } else {
                     player2DrinkedBears += 3;
+
                 }
                 System.out.println("Player 1 Goal");
             }
@@ -87,6 +90,8 @@ public class Game {
         if(player1DrinkedBears != previousplayer1DrinkedBears || player2DrinkedBears != previousplayer2DrinkedBears){
             drink.play(true);
             ball.getPos().set(Field.PADDINGX + (Field.WIDTH / 2), Field.PADDINGY + Field.HEIGHT - 50);
+            player1.getPos().set(field.getXPlayer1(),field.getYPlayer());
+            player2.getPos().set(field.getXPlayer2(),field.getYPlayer());
         }
     }
 
@@ -107,14 +112,14 @@ public class Game {
 
     private boolean player1CheckX() {
 
-        if (ball.getPos().getX() > player1.getPos().getX() && ball.getPos().getX() + ball.getSize() < player1.getPos().getX() + field.getPlayerWidth()) {
+        if (ball.getPos().getX() + ball.getSize() > player1.getPos().getX() && ball.getPos().getX() + ball.getSize() < player1.getPos().getX() + field.getPlayerWidth()) {
             return true;
         }
         return false;
     }
 
     private boolean player1CheckY() {
-        if (ball.getPos().getY() > player1.getPos().getY() && ball.getPos().getY() + ball.getSize() < player1.getPos().getY() + field.getPlayerHeight()) {
+        if (ball.getPos().getY() + ball.getSize() > player1.getPos().getY() && ball.getPos().getY() + ball.getSize() < player1.getPos().getY() + field.getPlayerHeight()) {
             return true;
         }
         return false;
