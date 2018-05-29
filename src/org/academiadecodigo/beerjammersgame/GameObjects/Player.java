@@ -4,6 +4,7 @@ import org.academiadecodigo.beerjammersgame.field.Direction;
 import org.academiadecodigo.beerjammersgame.field.Drawable;
 import org.academiadecodigo.beerjammersgame.field.Field;
 import org.academiadecodigo.beerjammersgame.field.Position;
+import org.academiadecodigo.beerjammersgame.objects.PlayerType;
 
 public class Player extends GameObject implements Drawable {
 
@@ -13,10 +14,11 @@ public class Player extends GameObject implements Drawable {
     private boolean haveBall = false;
     private boolean launch = false;
 
-    public Player(Field field, int x) {
+    public Player(Field field, int x, PlayerType player) {
         this.field = field;
-        this.velocity = 100;
-        pos = new Position(this.field, x, field.getYPlayer(), field.getPlayerWidth(), field.getPlayerHeight());
+        this.velocity = player.getSpeed();
+        //pos = new Position(this.field, x, field.getYPlayer(), field.getPlayerWidth(), field.getPlayerHeight());
+        pos = new Position(this.field, x ,field.getYPlayer(), player.geturlImage());
     }
 
 

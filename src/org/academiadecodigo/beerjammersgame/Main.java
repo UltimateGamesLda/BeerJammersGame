@@ -10,16 +10,12 @@ public class Main {
 
         Menu menu = new Menu();
 
-        Sound song = new Sound("/resources/GameSong.wav");
-        song.play(true);
-
         PlayerType[] players = menu.init();
 
         Picture field = new Picture(10, 10, "./Field.png");
         field.draw();
 
-        Game game = new Game();
-        game.init();
+        Game game = new Game(players);
         game.start();
     }
 }

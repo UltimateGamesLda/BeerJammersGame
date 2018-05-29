@@ -33,13 +33,6 @@ public class Field {
         this.ballMaxY = PADDINGY + HEIGHT - ballHeight;
     }
 
-    public void init() {
-
-        border = new Rectangle(PADDINGX, PADDINGY, WIDTH, HEIGHT);
-        border.draw();
-
-    }
-
     public int getXPlayer1() {
         return PADDINGX + goalSize;
     }
