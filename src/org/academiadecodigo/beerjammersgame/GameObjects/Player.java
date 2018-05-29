@@ -5,7 +5,7 @@ import org.academiadecodigo.beerjammersgame.field.Drawable;
 import org.academiadecodigo.beerjammersgame.field.Field;
 import org.academiadecodigo.beerjammersgame.field.Position;
 import org.academiadecodigo.beerjammersgame.keyboard.PlayerKeyboardHandler;
-import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
+import org.academiadecodigo.beerjammersgame.objects.PlayerType;
 
 public class Player extends GameObject implements Drawable {
 
@@ -17,13 +17,13 @@ public class Player extends GameObject implements Drawable {
     private Direction sendBallDirection;
     private PlayerKeyboardHandler playerKeyboardHandler;
     private Ball ball;
-
-
-    public Player(Field field, int x, Ball ball) {
+    
+    public Player(Field field, int x, PlayerType player, Ball ball) {
         this.field = field;
-        this.velocity = 100;
-        pos = new Position(this.field, x, field.getYPlayer(), field.getPlayerWidth(), field.getPlayerHeight());
-        this.ball = ball;
+        this.velocity = player.getSpeed();
+        //pos = new Position(this.field, x, field.getYPlayer(), field.getPlayerWidth(), field.getPlayerHeight());
+        pos = new Position(this.field, x ,field.getYPlayer(), player.geturlImage());this.ball = ball;
+
     }
 
 

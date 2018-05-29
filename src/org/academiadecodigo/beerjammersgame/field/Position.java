@@ -57,7 +57,7 @@ public class Position {
         x += distanceX;
         y += distanceY;
         if(rectangle != null){
-        rectangle.translate(distanceX, distanceY);
+            rectangle.translate(distanceX, distanceY);
         } else {
             picture.translate(distanceX, distanceY);
         }

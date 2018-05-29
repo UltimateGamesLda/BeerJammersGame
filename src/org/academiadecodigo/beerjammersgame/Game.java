@@ -6,6 +6,7 @@ import org.academiadecodigo.beerjammersgame.field.Collision;
 import org.academiadecodigo.beerjammersgame.field.Field;
 import org.academiadecodigo.beerjammersgame.field.Position;
 import org.academiadecodigo.beerjammersgame.keyboard.PlayerKeyboardHandler;
+import org.academiadecodigo.beerjammersgame.objects.PlayerType;
 
 public class Game {
 
@@ -16,21 +17,17 @@ public class Game {
     private Collision  collision;
     private int player1DrinkedBears;
     private int player2DrinkedBears;
+    private Sound drink = new Sound("/resources/Drink.wav");
 
-    public Game() {
+    public Game(PlayerType[] players) {
+
         this.field = new Field();
         this.ball = new Ball(this.field, this.field.PADDINGX);
-        this.player1 = new Player(this.field, field.getXPlayer1(), ball);
-        this.player2 = new Player(this.field, field.getXPlayer2(), ball);
+        this.player1 = new Player(this.field, field.getXPlayer1(), players[0], ball);
+        this.player2 = new Player(this.field, field.getXPlayer2(), players[1], ball);
         this.collision = new Collision(this.field, this.player1, this.player2, this.ball);
         new PlayerKeyboardHandler(this.player1, this.player2);
 
-    }
-
-
-    public void init() {
-        //criar a field e os objectos
-        field.init();
     }
 
     public void start() throws InterruptedException {
@@ -52,6 +49,9 @@ public class Game {
     }
 
     private void checkGoal() {
+
+        int previousplayer2DrinkedBears = player2DrinkedBears;
+        int previousplayer1DrinkedBears = player1DrinkedBears;
 
         if (ball.getPos().getX() + ball.getSize() == field.getPaddingX() + field.getWidth()) {
             if (ball.getPos().getY() > field.getPaddingY() && ball.getPos().getY() < field.getPaddingY() + 193) {
@@ -77,6 +77,10 @@ public class Game {
                 player1DrinkedBears += 3;
             }
             System.out.println("Player 2 Goal");
+        }
+
+        if(player1DrinkedBears != previousplayer1DrinkedBears || player2DrinkedBears != previousplayer2DrinkedBears){
+            drink.play(true);
         }
     }
 
