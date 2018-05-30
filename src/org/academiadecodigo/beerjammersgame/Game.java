@@ -57,8 +57,6 @@ public class Game {
 
                 ball.drawInField();
 
-
-
                 collision.check();
 
                 checkCatch();
@@ -68,11 +66,10 @@ public class Game {
         }
     }
 
-    private void checkGoal() {
+    private void checkGoal() throws InterruptedException {
 
         int previousplayer2DrinkedBears = player2DrinkedBears;
         int previousplayer1DrinkedBears = player1DrinkedBears;
-
 
 
             /** check if the ball touch in right limit*/
@@ -80,20 +77,14 @@ public class Game {
 
                 if (ball.getPos().getY() > field.getPaddingY() && ball.getPos().getY() < field.getPaddingY() + 193) {
                     player2DrinkedBears += 3;
-
-
                     System.out.println("3");
-
                 } else if (ball.getPos().getY() > field.getPaddingY() + 193 && ball.getPos().getY() < field.getPaddingY() + 387) {
                     player2DrinkedBears += 5;
                     System.out.println("5");
-
                 } else {
                     player2DrinkedBears += 3;
-
                 }
                 System.out.println("Player 1 Goal");
-
             }
 
             /** check if the ball touch in left limit */
@@ -108,21 +99,34 @@ public class Game {
                 } else {
                     player1DrinkedBears += 3;
                 }
+
                 System.out.println("Player 2 Goal");
             }
 
 
         if(player1DrinkedBears != previousplayer1DrinkedBears || player2DrinkedBears != previousplayer2DrinkedBears){
             drink.play(true);
-            ball.getPos().set(Field.PADDINGX + (Field.WIDTH / 2), Field.PADDINGY + Field.HEIGHT - 50);
-            player1.getPos().set(field.getXPlayer1(),field.getYPlayer());
-            player2.getPos().set(field.getXPlayer2(),field.getYPlayer());
+            resetRound();
         }
-        String p1Score= Integer.toString(player1DrinkedBears);
+
+        String p1Score = Integer.toString(player1DrinkedBears);
         String p2Score = Integer.toString(player2DrinkedBears);
 
         player1Score.setText(p1Score);
         player2Score.setText(p2Score);
+    }
+
+    private void resetRound() throws InterruptedException {
+
+        ball.getPos().set(Field.PADDINGX + (Field.WIDTH / 2), Field.PADDINGY + Field.HEIGHT - 50);
+        player1.getPos().set(field.getXPlayer1(), field.getYPlayer());
+        player2.getPos().set(field.getXPlayer2(), field.getYPlayer());
+
+        while (!player1.gethaveBall() && !player2.gethaveBall()) {
+            ball.sendToPlayer();
+            Thread.sleep(10);
+            checkCatch();
+        }
     }
 
     private void checkCatch() {
