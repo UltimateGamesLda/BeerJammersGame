@@ -44,7 +44,6 @@ public class Ball implements Drawable {
     }
 
     public void toNextPos() {
-
         pos.setDistanceY(vertDirection.my() * velocity);
         pos.setDistanceX(horizDirection.mx() * velocity);
     }
@@ -110,6 +109,13 @@ public class Ball implements Drawable {
     }
 
     public int getSize(){ return size; }
+
+    public void sendToPlayer() {
+        pos.setDistanceY(vertDirection.my() * (velocity - 5));
+        pos.setDistanceX(horizDirection.mx() * (velocity));
+        setVertDirection(Direction.UP);
+        pos.move();
+    }
 }
 
 

@@ -63,6 +63,10 @@ public class Player extends GameObject implements Drawable {
                     sendBallDirection = direction.DOWN;
                     System.out.println("DOWN");
                     break;
+                default:
+                    sendBallDirection = direction.FRONT;
+                    System.out.println("FRONT");
+                    break;
             }
         }
     }
@@ -82,6 +86,11 @@ public class Player extends GameObject implements Drawable {
 
         if(direction == Direction.DOWN) {
             ball.setVertDirection(Direction.DOWN);
+            ball.changeHorizDirection();
+        }
+
+        if (direction == Direction.FRONT) {
+            ball.setVertDirection(Direction.FRONT);
             ball.changeHorizDirection();
         }
 

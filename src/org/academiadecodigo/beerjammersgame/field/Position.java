@@ -63,7 +63,6 @@ public class Position {
         }
         distanceX = 0;
         distanceY = 0;
-
     }
 
     public void set(double newX, double newY){

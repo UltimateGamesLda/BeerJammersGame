@@ -5,5 +5,4 @@ public interface Collidable {
     int[] getBottom();
     int[] getLeft();
     int[] getRight();
-
 }
