@@ -92,6 +92,10 @@ public class Position {
         this.distanceY = distanceY;
     }
 
+    public void deletePicture(){
+        picture.delete();
+    }
+
 }
 
 

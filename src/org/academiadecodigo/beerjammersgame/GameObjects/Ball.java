@@ -110,6 +110,10 @@ public class Ball implements Drawable {
 
     public int getSize(){ return size; }
 
+    public void setVelocity(int playerStrength){
+        this.velocity = playerStrength;
+    }
+
     public void sendToPlayer() {
         pos.setDistanceY(vertDirection.my() * (velocity - 5));
         pos.setDistanceX(horizDirection.mx() * (velocity));
@@ -117,37 +121,3 @@ public class Ball implements Drawable {
         pos.move();
     }
 }
-
-
-//enquando tiver dentro da
-//  if (pos.getY() < field.getBallMaxY()) {
-//se estiver no limite inferior
-// if (pos.getY() + my * velocity >= field.getBallMaxY()) {
-//pos.setDistanceY(field.getBallMaxY() - pos.getY());
-//my = -1;
-//return;
-//}
-
-//limite superior
-//if (pos.getY() + my * velocity <= field.PADDING) {
-//pos.setDistanceY(field.PADDING - pos.getY());
-//my = 1;
-//return;
-//}
-
-//}
-
-//if (pos.getX() < field.getBallMaxX()) {
-////se estiver no limite direito
-//if (pos.getX() + mx * velocity >= field.getBallMaxX()) {
-//pos.setDistanceY(field.getBallMaxX() - pos.getX());
-//mx = -1;
-//return;
-//}
-//esq.
-//if (pos.getX() + mx * velocity <= field.PADDING) {
-//pos.setDistanceX(field.PADDING - pos.getX());
-//mx = 1;
-//return;
-//}
-//}

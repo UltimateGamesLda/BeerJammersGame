@@ -4,11 +4,17 @@ import org.academiadecodigo.beerjammersgame.Sound;
 import org.academiadecodigo.beerjammersgame.objects.PlayerType;
 
 public class Menu {
+
+    private Sound song = new Sound("/resources/GameSong.wav");
+
     public PlayerType[] init(){
 
-        Sound song = new Sound("/resources/GameSong.wav");
         song.play(true);
 
         return new MenuMouseHandler().start();
+    }
+
+    public void stopMusic(){
+        song.stop();
     }
 }

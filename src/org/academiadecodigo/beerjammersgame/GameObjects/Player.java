@@ -23,10 +23,7 @@ public class Player extends GameObject implements Drawable {
         this.field = field;
         this.velocity = player.getSpeed();
         this.player = player;
-
-        //pos = new Position(this.field, x, field.getYPlayer(), field.getPlayerWidth(), field.getPlayerHeight());
         pos = new Position(this.field, x ,field.getYPlayer(), player.geturlImage());this.ball = ball;
-
     }
 
 
@@ -54,7 +51,7 @@ public class Player extends GameObject implements Drawable {
                     break;
             }
         } else {
-
+            ball.setVelocity(player.getStrength());
             switch (direction) {
                 case UP:
                     sendBallDirection = direction.UP;

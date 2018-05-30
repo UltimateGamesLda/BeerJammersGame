@@ -8,9 +8,7 @@ import org.academiadecodigo.beerjammersgame.keyboard.PlayerKeyboardHandler;
 import org.academiadecodigo.beerjammersgame.objects.PlayerType;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Text;
-import java.util.Timer;
-import java.util.TimerTask;
-
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Game {
 
@@ -26,12 +24,12 @@ public class Game {
     private Sound drink = new Sound("/resources/Drink.wav");
     private Text player1Score;
     private Text player2Score;
-
     private Text player1MaxBeer;
     private Text player2MaxBeer;
-
     private String defaultScore = "0";
     private Text timerShow;
+
+    private Picture finalShow;
 
 
     public Game(PlayerType[] players) throws InterruptedException {
@@ -107,9 +105,7 @@ public class Game {
         }
 
         playerWin();
-
     }
-
     private void checkGoal() throws InterruptedException {
 
         int previousplayer2DrinkedBears = player2DrinkedBears;
@@ -160,6 +156,7 @@ public class Game {
     private void resetRound() throws InterruptedException {
 
         ball.getPos().set(Field.PADDINGX + (Field.WIDTH / 2), Field.PADDINGY + Field.HEIGHT - 50);
+        ball.setVelocity(10);
 
         while (!player1.gethaveBall() && !player2.gethaveBall()) {
             player1.getPos().set(field.getXPlayer1(), field.getYPlayer());
@@ -219,22 +216,42 @@ public class Game {
         return false;
     }
 
-    private void playerWin() {
+    private void playerWin() throws InterruptedException {
         if (player1RoundsWin == 2){
             System.out.println("Player 1 WIN");
+            finalShow = new Picture(10,10,"./Player1Win.png");
+            pictureEndDraw();
         } else {
             System.out.println("Player 2 WIN");
+            finalShow = new Picture(10,10,"./Player2Win.png");
+            pictureEndDraw();
         }
+
+        player1.getPos().deletePicture();
+        player2.getPos().deletePicture();
+        ball.getPos().deletePicture();
+        player1Score.delete();
+        player2Score.delete();
+        player1MaxBeer.delete();
+        player2MaxBeer.delete();
     }
 
     private void playerWinRound() throws InterruptedException {
 
-        if (player1DrinkedBears < player1.getPlayer().getBeerCapacity() || player1DrinkedBears < player2DrinkedBears){
+        if (player1DrinkedBears == player2DrinkedBears) {
+            System.out.println("Nobody Wins");
+            finalShow = new Picture(10,10,"./RoundDraw.png");
+            pictureEndDraw();
+        } else if (player1DrinkedBears < player1.getPlayer().getBeerCapacity() && player1DrinkedBears < player2DrinkedBears){
             player1RoundsWin++;
             System.out.println("Player 1 WIN ROUND");
-        } else if(player1DrinkedBears < player2.getPlayer().getBeerCapacity() || player2DrinkedBears < player1DrinkedBears){
+            finalShow = new Picture(10,10,"./Player1WinRound.png");
+            pictureEndDraw();
+        } else if(player2DrinkedBears < player2.getPlayer().getBeerCapacity() && player2DrinkedBears < player1DrinkedBears){
             player2RoundsWin++;
             System.out.println("Player 2 WIN ROUND");
+            finalShow = new Picture(10,10,"./Player2RoundWin.png");
+            pictureEndDraw();
         }
 
         player1DrinkedBears = 0;
@@ -242,5 +259,12 @@ public class Game {
 
         player1.setHaveBall(false);
         player2.setHaveBall(false);
+    }
+
+    public void pictureEndDraw() throws InterruptedException {
+        finalShow.draw();
+        System.out.println("asdjkhjaklsd");
+        Thread.sleep(5000);
+        finalShow.delete();
     }
 }
