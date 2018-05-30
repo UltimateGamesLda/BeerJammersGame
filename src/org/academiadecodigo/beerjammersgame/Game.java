@@ -119,10 +119,9 @@ public class Game {
     private void resetRound() throws InterruptedException {
 
         ball.getPos().set(Field.PADDINGX + (Field.WIDTH / 2), Field.PADDINGY + Field.HEIGHT - 50);
-        player1.getPos().set(field.getXPlayer1(), field.getYPlayer());
-        player2.getPos().set(field.getXPlayer2(), field.getYPlayer());
-
         while (!player1.gethaveBall() && !player2.gethaveBall()) {
+            player1.getPos().set(field.getXPlayer1(), field.getYPlayer());
+            player2.getPos().set(field.getXPlayer2(), field.getYPlayer());
             ball.sendToPlayer();
             Thread.sleep(10);
             checkCatch();
