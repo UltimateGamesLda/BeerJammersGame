@@ -8,6 +8,9 @@ import org.academiadecodigo.beerjammersgame.keyboard.PlayerKeyboardHandler;
 import org.academiadecodigo.beerjammersgame.objects.PlayerType;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Text;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class Game {
 
@@ -15,7 +18,7 @@ public class Game {
     private Player player2;
     private Ball ball;
     private Field field;
-    private Collision  collision;
+    private Collision collision;
     private int player1DrinkedBears;
     private int player2DrinkedBears;
     private int player1RoundsWin;
@@ -23,12 +26,15 @@ public class Game {
     private Sound drink = new Sound("/resources/Drink.wav");
     private Text player1Score;
     private Text player2Score;
+
     private Text player1MaxBeer;
     private Text player2MaxBeer;
 
     private String defaultScore = "0";
+    private Text timerShow;
 
-    public Game(PlayerType[] players) {
+
+    public Game(PlayerType[] players) throws InterruptedException {
 
         this.field = new Field();
         this.ball = new Ball(this.field, this.field.PADDINGX);
@@ -38,17 +44,22 @@ public class Game {
         new PlayerKeyboardHandler(this.player1, this.player2);
 
         this.collision = new Collision(this.field, this.player1, this.player2, this.ball);
-        this.player1Score = new Text((double)((Field.WIDTH)/2)+Field.PADDINGX - 100,(double)(Field.PADDINGX/2)+ 15 ,defaultScore);
-        this.player2Score = new Text((double)((Field.WIDTH)/2)+Field.PADDINGX + 100,(double)(Field.PADDINGX/2)+ 15 ,defaultScore);
+        this.player1Score = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX - 100, (double) (Field.PADDINGX / 2) + 15, defaultScore);
+        this.player2Score = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX + 100, (double) (Field.PADDINGX / 2) + 15, defaultScore);
         this.player1MaxBeer = new Text((double) (Field.PADDINGX / 3), (double) (Field.PADDINGY) + 10, Integer.toString(players[0].getBeerCapacity()));
         this.player2MaxBeer = new Text((double) (Field.PADDINGX / 2) + Field.WIDTH + Field.PADDINGX, (double) (Field.PADDINGY) + 10, Integer.toString(players[1].getBeerCapacity()));
+        this.timerShow = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX - 10, (double) (Field.PADDINGX / 2) + 15, defaultScore);
+
+        timerShow.draw();
+        timerShow.grow(25, 25);
+        timerShow.setColor(Color.YELLOW);
 
         player1Score.draw();
-        player1Score.grow(30,30);
+        player1Score.grow(30, 30);
         player1Score.setColor(Color.RED);
 
         player2Score.draw();
-        player2Score.grow(30,30);
+        player2Score.grow(30, 30);
         player2Score.setColor(Color.RED);
 
         player1MaxBeer.draw();
@@ -63,9 +74,17 @@ public class Game {
 
     public void start() throws InterruptedException {
 
-        while(player1RoundsWin != 2 && player2RoundsWin != 2) {
 
-            while (player1DrinkedBears < player1.getPlayer().getBeerCapacity() && player2DrinkedBears < player2.getPlayer().getBeerCapacity()) {
+        while (player1RoundsWin != 2 && player2RoundsWin != 2) {
+
+            Chronometer gameTime = new Chronometer(10000);
+            gameTime.start();
+
+            while (player1DrinkedBears < player1.getPlayer().getBeerCapacity() && player2DrinkedBears < player2.getPlayer().getBeerCapacity() && gameTime.getMsLeft() > 0) {
+
+                gameTime.tick();
+
+                timerShow.setText(gameTime.toString());
 
                 Thread.sleep(15);
 
@@ -78,14 +97,17 @@ public class Game {
                     checkCatch();
 
                     checkGoal();
+
                 }
             }
 
             playerWinRound();
+            gameTime.reset();
 
         }
 
         playerWin();
+
     }
 
     private void checkGoal() throws InterruptedException {
@@ -207,10 +229,10 @@ public class Game {
 
     private void playerWinRound() throws InterruptedException {
 
-        if (player1DrinkedBears < player1.getPlayer().getBeerCapacity()){
+        if (player1DrinkedBears < player1.getPlayer().getBeerCapacity() || player1DrinkedBears < player2DrinkedBears){
             player1RoundsWin++;
             System.out.println("Player 1 WIN ROUND");
-        } else if(player1DrinkedBears < player2.getPlayer().getBeerCapacity()) {
+        } else if(player1DrinkedBears < player2.getPlayer().getBeerCapacity() || player2DrinkedBears < player1DrinkedBears){
             player2RoundsWin++;
             System.out.println("Player 2 WIN ROUND");
         }
