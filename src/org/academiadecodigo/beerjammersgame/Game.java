@@ -75,7 +75,7 @@ public class Game {
 
         while (player1RoundsWin != 2 && player2RoundsWin != 2) {
 
-            Chronometer gameTime = new Chronometer(10000);
+            Chronometer gameTime = new Chronometer(60000);
             gameTime.start();
 
             while (player1DrinkedBears < player1.getPlayer().getBeerCapacity() && player2DrinkedBears < player2.getPlayer().getBeerCapacity() && gameTime.getMsLeft() > 0) {
