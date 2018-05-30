@@ -47,4 +47,5 @@ public enum PlayerType {
     public int getStrength() { return this.strength; }
 
     public String geturlImage(){ return this.urlImage; }
+
 }

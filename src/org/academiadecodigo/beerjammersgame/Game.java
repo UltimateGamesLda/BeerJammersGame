@@ -10,8 +10,11 @@ import org.academiadecodigo.beerjammersgame.objects.PlayerType;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class Game {
+
+public class Game{
 
     private Player player1;
     private Player player2;
@@ -25,8 +28,11 @@ public class Game {
     private Text player2Score;
     private String p1Score;
     private String p2Score;
+    private Timer timer;
+    private Text roundWinner;
+    private Text timerShow;
 
-    public Game(PlayerType[] players) {
+    public Game(PlayerType[] players) throws InterruptedException {
 
         this.field = new Field();
         this.ball = new Ball(this.field, this.field.PADDINGX);
@@ -38,6 +44,11 @@ public class Game {
         this.player1Score = new Text((double)((Field.WIDTH)/2)+Field.PADDINGX -100,(double)(Field.PADDINGX/2)+15,p1Score);
         this.p2Score = "0";
         this.player2Score = new Text((double)((Field.WIDTH)/2)+Field.PADDINGX +100,(double)(Field.PADDINGX/2)+15,p1Score);
+        this.timerShow = new Text((double)((Field.WIDTH)/2)+Field.PADDINGX-10,(double)(Field.PADDINGX/2)+15,p1Score);
+
+        timerShow.draw();
+        timerShow.grow(25,25);
+        timerShow.setColor(Color.YELLOW);
 
         player1Score.draw();
         player1Score.grow(30,30);
@@ -46,11 +57,19 @@ public class Game {
         player2Score.draw();
         player2Score.grow(30,30);
         player2Score.setColor(Color.RED);
+
     }
 
     public void start() throws InterruptedException {
-        while (true) {
 
+        Chronometer gameTime = new Chronometer(60000);
+        gameTime.start();
+
+        while (gameTime.getMsLeft()>0) {
+
+            gameTime.tick();
+            timerShow.setText(gameTime.toString());
+            System.out.println("time: " + gameTime.toString());
             Thread.sleep(15);
 
             if(!player1.gethaveBall() && !player2.gethaveBall()) {
@@ -66,7 +85,19 @@ public class Game {
                 checkGoal();
             }
         }
+        gameTime.reset();
     }
+
+    /* SHOW PLAYER WIN IN FIELD
+    private Text winnerRound(){
+
+
+        if(player1DrinkedBears>player2DrinkedBears){
+            return roundWinner = new Text((double)(Field.WIDTH/2)+Field.PADDINGX -200,(double)(Field.HEIGHT/2)+Field.PADDINGY, player1.getName());
+        }
+        return roundWinner = new Text((double)(Field.WIDTH/2)+Field.PADDINGX -200,(double)(Field.HEIGHT/2)+Field.PADDINGY, player2.getName());
+    }
+    */
 
     private void checkGoal() {
 

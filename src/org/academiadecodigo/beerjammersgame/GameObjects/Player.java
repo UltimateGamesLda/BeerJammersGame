@@ -9,6 +9,7 @@ import org.academiadecodigo.beerjammersgame.objects.PlayerType;
 
 public class Player extends GameObject implements Drawable {
 
+    private String name;
     private Position pos;
     private Field field;
     private int velocity;
@@ -21,6 +22,7 @@ public class Player extends GameObject implements Drawable {
     public Player(Field field, int x, PlayerType player, Ball ball) {
         this.field = field;
         this.velocity = player.getSpeed();
+        this.name = player.toString();
         //pos = new Position(this.field, x, field.getYPlayer(), field.getPlayerWidth(), field.getPlayerHeight());
         pos = new Position(this.field, x ,field.getYPlayer(), player.geturlImage());this.ball = ball;
 
@@ -114,5 +116,9 @@ public class Player extends GameObject implements Drawable {
 
     public Position getPos() {
         return pos;
+    }
+
+    public String getName() {
+        return name;
     }
 }
