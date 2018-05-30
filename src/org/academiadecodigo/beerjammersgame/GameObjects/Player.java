@@ -15,12 +15,13 @@ public class Player extends GameObject implements Drawable {
     private boolean haveBall = false;
     private boolean launch = false;
     private Direction sendBallDirection;
-    private PlayerKeyboardHandler playerKeyboardHandler;
     private Ball ball;
+    private PlayerType player;
     
     public Player(Field field, int x, PlayerType player, Ball ball) {
         this.field = field;
         this.velocity = player.getSpeed();
+        this.player = player;
         //pos = new Position(this.field, x, field.getYPlayer(), field.getPlayerWidth(), field.getPlayerHeight());
         pos = new Position(this.field, x ,field.getYPlayer(), player.geturlImage());this.ball = ball;
 
@@ -115,6 +116,10 @@ public class Player extends GameObject implements Drawable {
         } else {
             haveBall = false;
         }
+    }
+
+    public PlayerType getPlayer() {
+        return player;
     }
 
     public boolean gethaveBall(){
