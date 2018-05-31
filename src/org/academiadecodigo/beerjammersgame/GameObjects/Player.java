@@ -12,7 +12,7 @@ public class Player extends GameObject implements Drawable {
     private int velocity;
     private boolean haveBall = false;
     private boolean launch = false;
-    private Direction sendBallDirection;
+    private volatile Direction sendBallDirection;
     private Ball ball;
     private PlayerType player;
     private int maxX;
@@ -49,6 +49,7 @@ public class Player extends GameObject implements Drawable {
                     break;
                 case LEFT:
                     if (pos.getX() - velocity <= maxX) {
+                        
                         pos.setDistanceX(maxX - pos.getX());
                         break;
                     }
@@ -75,6 +76,7 @@ public class Player extends GameObject implements Drawable {
                     break;
                 default:
                     sendBallDirection = direction.FRONT;
+
                     System.out.println("FRONT");
                     break;
             }
