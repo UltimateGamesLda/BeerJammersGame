@@ -8,6 +8,8 @@ public class Field {
     public static final int PADDINGY = 257;
     public static final int HEIGHT = 572;
     public static final int WIDTH = 1170;
+    private int player1maxX;
+    private int player2maxX;
     private int goalSize;
     private int playerHeight;
     private int playerWidth;
@@ -25,12 +27,14 @@ public class Field {
         this.goalSize = WIDTH / 16 ; //goals have one eight
         this.playerHeight = 150;
         this.playerWidth = 75;
-        this.playerMaxX = WIDTH/2;
+        this.playerMaxX = WIDTH / 2;
         this.playerMaxY = PADDINGY + HEIGHT - playerHeight;
         this.ballHeight= 40;
         this.ballWidth = 40;
         this.ballMaxX = PADDINGX + WIDTH - ballWidth;
         this.ballMaxY = PADDINGY + HEIGHT - ballHeight;
+        this.player1maxX = PADDINGX + playerWidth;
+        this.player2maxX = PADDINGX + (WIDTH / 2) + 40;
     }
 
     public int getXPlayer1() {
@@ -42,7 +46,7 @@ public class Field {
     }
 
     public int getYPlayer() {
-        return PADDINGY + (HEIGHT / 2) - (playerHeight/2) ;
+        return PADDINGY + (HEIGHT / 2) - (playerHeight / 2) ;
     }
 
     public int getPlayerHeight() {
@@ -95,6 +99,14 @@ public class Field {
 
     public int getGoalSize(){
         return goalSize;
+    }
+
+    public int getPlayer1maxX(){
+        return player1maxX;
+    }
+
+    public int getPlayer2maxX(){
+        return player2maxX;
     }
 }
 

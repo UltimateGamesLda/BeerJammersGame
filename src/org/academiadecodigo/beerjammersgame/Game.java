@@ -36,8 +36,8 @@ public class Game {
 
         this.field = new Field();
         this.ball = new Ball(this.field, this.field.PADDINGX);
-        this.player1 = new Player(this.field, field.getXPlayer1(), players[0], ball);
-        this.player2 = new Player(this.field, field.getXPlayer2(), players[1], ball);
+        this.player1 = new Player(this.field, field.getXPlayer1(), players[0], ball, field.getPlayer1maxX());
+        this.player2 = new Player(this.field, field.getXPlayer2(), players[1], ball, field.getPlayer2maxX());
 
         new PlayerKeyboardHandler(this.player1, this.player2);
 
@@ -259,6 +259,8 @@ public class Game {
 
         player1.setHaveBall(false);
         player2.setHaveBall(false);
+
+        resetRound();
     }
 
     public void pictureEndDraw() throws InterruptedException {

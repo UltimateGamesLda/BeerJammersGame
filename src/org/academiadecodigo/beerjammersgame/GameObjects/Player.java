@@ -18,12 +18,15 @@ public class Player extends GameObject implements Drawable {
     private Direction sendBallDirection;
     private Ball ball;
     private PlayerType player;
+    private int maxX;
     
-    public Player(Field field, int x, PlayerType player, Ball ball) {
+    public Player(Field field, int x, PlayerType player, Ball ball, int playerMaxX) {
         this.field = field;
         this.velocity = player.getSpeed();
         this.player = player;
-        pos = new Position(this.field, x ,field.getYPlayer(), player.geturlImage());this.ball = ball;
+        pos = new Position(this.field, x ,field.getYPlayer(), player.geturlImage());
+        this.ball = ball;
+        this.maxX = playerMaxX;
     }
 
 
@@ -46,8 +49,18 @@ public class Player extends GameObject implements Drawable {
                     pos.setDistanceY(velocity);
                     break;
                 case LEFT:
+                    if (pos.getX() - velocity <= maxX) {
+                        pos.setDistanceX(maxX - pos.getX());
+                        break;
+                    }
+                    pos.setDistanceX(-velocity);
                     break;
                 case RIGHT:
+                    if (pos.getX() + velocity >= maxX + (Field.WIDTH / 3)) {
+                        pos.setDistanceX(maxX + (Field.WIDTH / 3) - pos.getX());
+                        break;
+                    }
+                    pos.setDistanceX(velocity);
                     break;
             }
         } else {
@@ -89,6 +102,7 @@ public class Player extends GameObject implements Drawable {
 
         if (direction == Direction.FRONT) {
             ball.setVertDirection(Direction.FRONT);
+            ball.setVelocity((int)(player.getStrength() * 1.5));
             ball.changeHorizDirection();
         }
 
