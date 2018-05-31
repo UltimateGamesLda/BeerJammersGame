@@ -52,8 +52,8 @@ public class Game {
         this.collision = new Collision(this.field, this.player1, this.player2, this.ball);
         this.checkGoal = new CheckGoal(player1,player2, ball, collision, field);
 
-        this.player1Score = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX - 110, (double) (Field.PADDINGX / 2) + 10, defaultScore);
-        this.player2Score = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX + 119, (double) (Field.PADDINGX / 2) + 10, defaultScore);
+        this.player1Score = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX - 128, (double) (Field.PADDINGX / 2) + 10, defaultScore);
+        this.player2Score = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX + 90, (double) (Field.PADDINGX / 2) + 10, defaultScore);
         this.player1MaxBeer = new Text((double) (Field.PADDINGX / 3), (double) (Field.PADDINGY) + 10, Integer.toString(playersTYPE[0].getBeerCapacity()));
         this.player2MaxBeer = new Text((double) (Field.PADDINGX / 2) + Field.WIDTH + Field.PADDINGX, (double) (Field.PADDINGY) + 10, Integer.toString(playersTYPE[1].getBeerCapacity()));
         this.timerShow = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX - 47, (double) (Field.PADDINGX / 2) - 3, defaultScore);
@@ -85,7 +85,7 @@ public class Game {
 
         while (player1.getRoundWins() != 2 && player2.getRoundWins() != 2) {
 
-            Chronometer gameTime = new Chronometer(10000);
+            Chronometer gameTime = new Chronometer(60000);
             gameTime.start();
             startRound.play(true);
 
@@ -125,12 +125,14 @@ public class Game {
     }
 
     private void scoreRefresh() {
+
+
         String p1Score = Integer.toString(player2.getDrinkedBeers());
         String p2Score = Integer.toString(player1.getDrinkedBeers());
 
         player1Score.setText(p1Score);
         player2Score.setText(p2Score);
-        if (player1)
+
     }
 
     private void playerWinRound() throws InterruptedException {
