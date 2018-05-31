@@ -2,6 +2,7 @@ package org.academiadecodigo.beerjammersgame;
 
 import org.academiadecodigo.beerjammersgame.GameObjects.Ball;
 import org.academiadecodigo.beerjammersgame.GameObjects.Player;
+import org.academiadecodigo.beerjammersgame.field.Catch;
 import org.academiadecodigo.beerjammersgame.field.Collision;
 import org.academiadecodigo.beerjammersgame.field.Field;
 import org.academiadecodigo.beerjammersgame.keyboard.PlayerKeyboardHandler;
@@ -19,6 +20,7 @@ public class Game {
     private Ball ball;
     private Field field;
     private Collision collision;
+    private Catch catching;
     private int player1DrinkedBears;
     private int player2DrinkedBears;
     private int player1RoundsWin;
@@ -48,9 +50,10 @@ public class Game {
 
         new PlayerKeyboardHandler(this.player1, this.player2);
 
+        this.catching = new Catch(player1, player2, ball, field);
         this.collision = new Collision(this.field, this.player1, this.player2, this.ball);
-        this.player1Score = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX + 100, (double) (Field.PADDINGX / 2) + 15, defaultScore);
-        this.player2Score = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX - 100, (double) (Field.PADDINGX / 2) + 15, defaultScore);
+        this.player2Score = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX + 100, (double) (Field.PADDINGX / 2) + 15, defaultScore);
+        this.player1Score = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX - 100, (double) (Field.PADDINGX / 2) + 15, defaultScore);
         this.player1MaxBeer = new Text((double) (Field.PADDINGX / 3), (double) (Field.PADDINGY) + 10, Integer.toString(playersTYPE[0].getBeerCapacity()));
         this.player2MaxBeer = new Text((double) (Field.PADDINGX / 2) + Field.WIDTH + Field.PADDINGX, (double) (Field.PADDINGY) + 10, Integer.toString(playersTYPE[1].getBeerCapacity()));
         this.timerShow = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX - 10, (double) (Field.PADDINGX / 2) + 15, defaultScore);
@@ -101,7 +104,7 @@ public class Game {
 
                     collision.check();
 
-                    checkCatch();
+                    catching.checkCatch();
 
                     checkGoal();
 
@@ -150,8 +153,8 @@ public class Game {
             resetRound();
         }
 
-        String p1Score = Integer.toString(player1DrinkedBears);
-        String p2Score = Integer.toString(player2DrinkedBears);
+        String p1Score = Integer.toString(player2DrinkedBears);
+        String p2Score = Integer.toString(player1DrinkedBears);
 
         player1Score.setText(p1Score);
         player2Score.setText(p2Score);
@@ -168,57 +171,8 @@ public class Game {
             player2.getPos().set(field.getXPlayer2(), field.getYPlayer());
             ball.sendToPlayer();
             Thread.sleep(10);
-            checkCatch();
+            catching.checkCatch();
         }
-    }
-
-    private void checkCatch() {
-
-        if (player1CheckX() && player1CheckY() && !player1.gethaveBall()) {
-            System.out.println("Player 1 Catch ball");
-            player1.setHaveBall(true);
-            System.out.println((player1.getPos().getX() + field.getPlayerWidth() + 10));
-            ball.getPos().set((player1.getPos().getX() + field.getPlayerWidth() + 10), (player1.getPos().getY() + (field.getPlayerHeight() / 2)));
-            return;
-        }
-
-        if (player2CheckX() && player2CheckY() && !player2.gethaveBall()) {
-            System.out.println("Player 2 Catch ball");
-            player2.setHaveBall(true);
-            System.out.println((player2.getPos().getX() - 55));
-            ball.getPos().set((player2.getPos().getX() - 55), (player2.getPos().getY() + (field.getPlayerHeight() / 2)));
-            return;
-        }
-    }
-
-    private boolean player1CheckX() {
-
-        if (ball.getPos().getX() + ball.getSize() > player1.getPos().getX() && ball.getPos().getX() + ball.getSize() < player1.getPos().getX() + field.getPlayerWidth()) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean player1CheckY() {
-        if (ball.getPos().getY() + ball.getSize() > player1.getPos().getY() && ball.getPos().getY() + ball.getSize() < player1.getPos().getY() + field.getPlayerHeight()) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean player2CheckX() {
-
-        if (ball.getPos().getX() + ball.getSize() > player2.getPos().getX() && ball.getPos().getX() + ball.getSize() < player2.getPos().getX() + field.getPlayerWidth()) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean player2CheckY() {
-        if (ball.getPos().getY() + ball.getSize() > player2.getPos().getY() && ball.getPos().getY() + ball.getSize() < player2.getPos().getY() + field.getPlayerHeight()) {
-            return true;
-        }
-        return false;
     }
 
     private void playerWin() throws InterruptedException {

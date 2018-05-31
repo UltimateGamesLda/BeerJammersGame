@@ -1,9 +1,6 @@
 package org.academiadecodigo.beerjammersgame;
 
-import org.academiadecodigo.beerjammersgame.menu.Menu;
 import org.academiadecodigo.beerjammersgame.menu.Replay;
-import org.academiadecodigo.beerjammersgame.GameObjects.PlayerType;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {

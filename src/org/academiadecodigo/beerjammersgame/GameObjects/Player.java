@@ -7,7 +7,6 @@ import org.academiadecodigo.beerjammersgame.field.Position;
 
 public class Player extends GameObject implements Drawable {
 
-    private String name;
     private Position pos;
     private Field field;
     private int velocity;
@@ -139,9 +138,5 @@ public class Player extends GameObject implements Drawable {
 
     public Position getPos() {
         return pos;
-    }
-
-    public String getName() {
-        return name;
     }
 }
