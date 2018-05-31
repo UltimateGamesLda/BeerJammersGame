@@ -128,6 +128,7 @@ public class Game {
 
         player1Score.setText(p1Score);
         player2Score.setText(p2Score);
+        if (player1)
     }
 
     private void playerWinRound() throws InterruptedException {
