@@ -23,6 +23,7 @@ public class Game {
     private CheckWin checkWin;
     private Sound drink = new Sound("/resources/Drink.wav");
     private Sound win = new Sound ("/resources/Win.wav");
+    private Sound startRound = new Sound("/resources/startNewRound.wav");
     private Text player1Score;
     private Text player2Score;
     private Text player1MaxBeer;
@@ -86,6 +87,7 @@ public class Game {
 
             Chronometer gameTime = new Chronometer(10000);
             gameTime.start();
+            startRound.play(true);
 
             while (player1.getDrinkedBeers() < player1.getPlayer().getBeerCapacity() && player2.getDrinkedBeers() < player2.getPlayer().getBeerCapacity() && gameTime.getMsLeft() > 0) {
 
@@ -135,6 +137,7 @@ public class Game {
 
         checkWin.playerWinRound();
         resetRound();
+
 
     }
 
