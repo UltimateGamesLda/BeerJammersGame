@@ -3,7 +3,7 @@ package org.academiadecodigo.beerjammersgame.field;
 import org.academiadecodigo.beerjammersgame.GameObjects.Ball;
 import org.academiadecodigo.beerjammersgame.GameObjects.Player;
 
-public class CheckGoal {
+public class CheckGoal implements Checkcable {
 
     private Player player1;
     private Player player2;
@@ -19,7 +19,7 @@ public class CheckGoal {
         this.field = field;
     }
 
-    public boolean checkGoal() throws InterruptedException {
+    public boolean check() throws InterruptedException {
 
         int previousplayer2DrinkedBears = player2.getDrinkedBeers();
         int previousplayer1DrinkedBears = player1.getDrinkedBeers();
@@ -52,6 +52,7 @@ public class CheckGoal {
         if(player1.getDrinkedBeers() != previousplayer1DrinkedBears || player2.getDrinkedBeers() != previousplayer2DrinkedBears){
             return true;
         }
+
 
         return false;
     }
