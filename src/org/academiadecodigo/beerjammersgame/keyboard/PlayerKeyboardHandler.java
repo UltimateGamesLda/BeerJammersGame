@@ -76,42 +76,42 @@ public class PlayerKeyboardHandler implements KeyboardHandler {
 
         switch (event.getKey()){
             case KeyboardEvent.KEY_UP:
-                player1.setDistance(Direction.UP);
-                player1.drawInField();
-                break;
-            case KeyboardEvent.KEY_DOWN:
-                player1.setDistance(Direction.DOWN);
-                player1.drawInField();
-                break;
-            case KeyboardEvent.KEY_LEFT:
-                player1.setDistance(Direction.LEFT);
-                player1.drawInField();
-                break;
-            case KeyboardEvent.KEY_RIGHT:
-                player1.setDistance(Direction.RIGHT);
-                player1.drawInField();
-                break;
-            case KeyboardEvent.KEY_L:
-                player1.launchBall();
-                break;
-            case KeyboardEvent.KEY_W:
                 player2.setDistance(Direction.UP);
                 player2.drawInField();
                 break;
-            case KeyboardEvent.KEY_S:
+            case KeyboardEvent.KEY_DOWN:
                 player2.setDistance(Direction.DOWN);
                 player2.drawInField();
                 break;
-            case KeyboardEvent.KEY_A:
+            case KeyboardEvent.KEY_LEFT:
                 player2.setDistance(Direction.LEFT);
                 player2.drawInField();
                 break;
-            case KeyboardEvent.KEY_D:
+            case KeyboardEvent.KEY_RIGHT:
                 player2.setDistance(Direction.RIGHT);
                 player2.drawInField();
                 break;
-            case KeyboardEvent.KEY_SPACE:
+            case KeyboardEvent.KEY_L:
                 player2.launchBall();
+                break;
+            case KeyboardEvent.KEY_W:
+                player1.setDistance(Direction.UP);
+                player1.drawInField();
+                break;
+            case KeyboardEvent.KEY_S:
+                player1.setDistance(Direction.DOWN);
+                player1.drawInField();
+                break;
+            case KeyboardEvent.KEY_A:
+                player1.setDistance(Direction.LEFT);
+                player1.drawInField();
+                break;
+            case KeyboardEvent.KEY_D:
+                player1.setDistance(Direction.RIGHT);
+                player1.drawInField();
+                break;
+            case KeyboardEvent.KEY_SPACE:
+                player1.launchBall();
                 break;
 
         }
