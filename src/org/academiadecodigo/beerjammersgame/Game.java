@@ -124,9 +124,7 @@ public class Game {
             /** check if the ball touch in right limit*/
             if (collision.getPlayer2Turn() && collision.hasGoal()) {
 
-                if (ball.getPos().getY() > field.getPaddingY() && ball.getPos().getY() < field.getPaddingY() + 193) {
-                    player2DrinkedBears += 3;
-                } else if (ball.getPos().getY() > field.getPaddingY() + 193 && ball.getPos().getY() < field.getPaddingY() + 387) {
+                if (ball.getPos().getY() > field.getPaddingY() + 193 && ball.getPos().getY() < field.getPaddingY() + 387) {
                     player2DrinkedBears += 5;
                 } else {
                     player2DrinkedBears += 3;
@@ -137,9 +135,7 @@ public class Game {
             /** check if the ball touch in left limit */
             if (collision.getPlayer1Turn() && collision.hasGoal()) {
 
-                if (ball.getPos().getY() > field.getPaddingY() && ball.getPos().getY() < field.getPaddingY() + 193) {
-                    player1DrinkedBears += 3;
-                } else if (ball.getPos().getY() > field.getPaddingY() + 193 && ball.getPos().getY() < field.getPaddingY() + 387) {
+                if (ball.getPos().getY() > field.getPaddingY() + 193 && ball.getPos().getY() < field.getPaddingY() + 387) {
                     player1DrinkedBears += 5;
                 } else {
                     player1DrinkedBears += 3;
