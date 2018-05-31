@@ -3,11 +3,12 @@ package org.academiadecodigo.beerjammersgame.GameObjects;
 import org.academiadecodigo.beerjammersgame.field.Direction;
 import org.academiadecodigo.beerjammersgame.field.Drawable;
 import org.academiadecodigo.beerjammersgame.field.Field;
+import org.academiadecodigo.beerjammersgame.field.Movable;
 import org.academiadecodigo.beerjammersgame.field.Position;
 import org.academiadecodigo.simplegraphics.graphics.*;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public class Ball implements Drawable {
+public class Ball implements Drawable, Movable {
     private Position pos;
     private Field field;
     private int velocity;
@@ -21,16 +22,23 @@ public class Ball implements Drawable {
         this.field = field;
         this.velocity = 10;
         this.size = 40;
-        //pos = new Position(this.field, x, this.field.PADDINGX, size, size);
-        pos = new Position(this.field,Field.PADDINGX + (Field.WIDTH / 2), Field.PADDINGY + Field.HEIGHT - 300, ballURL);
-        System.out.println(Field.PADDINGX + (Field.WIDTH / 2));
-        System.out.println(Field.PADDINGY + Field.HEIGHT - 300);
+
+        pos = new Position(this.field,Field.PADDINGX + (Field.WIDTH / 2), Field.PADDINGY + Field.HEIGHT - 300,
+                drawInField(Field.PADDINGX + (Field.WIDTH / 2), Field.PADDINGY + Field.HEIGHT - 300, ballURL));
+
         this.vertDirection = Direction.DOWN;
         this.horizDirection = Direction.RIGHT;
     }
 
     @Override
-    public void drawInField() { //to init
+    public Picture drawInField(int x, int y, String imageURL) { //to init
+        Picture picture = new Picture(x, y, imageURL);
+        picture.draw();
+        return picture;
+    }
+
+    @Override
+    public void move() {
         pos.move();
     }
 

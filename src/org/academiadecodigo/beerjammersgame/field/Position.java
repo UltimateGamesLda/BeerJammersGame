@@ -4,7 +4,6 @@ import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Position {
-    private Rectangle rectangle;
     private Picture picture;
     private int x;
     private int y;
@@ -12,27 +11,13 @@ public class Position {
     private int distanceY;
     private Field field;
 
-
-    public Position(Field field, int x, int y , int sizeX, int sizeY) {
+    public Position(Field field, int x, int y , Picture picture) {
         this.field = field;
         this.x = x;
         this.y = y;
         this.distanceX = 0;
         this.distanceY = 0;
-
-        rectangle = new Rectangle(x, y, sizeX, sizeY);
-        rectangle.draw();
-    }
-
-    public Position(Field field, int x, int y , String imageURL) {
-        this.field = field;
-        this.x = x;
-        this.y = y;
-        this.distanceX = 0;
-        this.distanceY = 0;
-
-        picture = new Picture(x, y, imageURL);
-        picture.draw();
+        this.picture = picture;
     }
 
     public void setX(int x) {
@@ -56,11 +41,7 @@ public class Position {
     public void move() {
         x += distanceX;
         y += distanceY;
-        if(rectangle != null){
-            rectangle.translate(distanceX, distanceY);
-        } else {
-            picture.translate(distanceX, distanceY);
-        }
+        picture.translate(distanceX, distanceY);
         distanceX = 0;
         distanceY = 0;
     }

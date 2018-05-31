@@ -1,11 +1,9 @@
 package org.academiadecodigo.beerjammersgame.GameObjects;
 
-import org.academiadecodigo.beerjammersgame.field.Direction;
-import org.academiadecodigo.beerjammersgame.field.Drawable;
-import org.academiadecodigo.beerjammersgame.field.Field;
-import org.academiadecodigo.beerjammersgame.field.Position;
+import org.academiadecodigo.beerjammersgame.field.*;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public class Player extends GameObject implements Drawable {
+public class Player extends GameObject implements Drawable, Movable {
 
     private Position pos;
     private Field field;
@@ -23,9 +21,9 @@ public class Player extends GameObject implements Drawable {
         this.field = field;
         this.velocity = player.getSpeed();
         this.player = player;
-        pos = new Position(this.field, x ,field.getYPlayer(), player.geturlImage());
         this.ball = ball;
         this.maxX = playerMaxX;
+        pos = new Position(this.field, x ,field.getYPlayer(), drawInField(x, field.getYPlayer(), player.geturlImage()));
     }
 
 
@@ -68,24 +66,29 @@ public class Player extends GameObject implements Drawable {
             switch (direction) {
                 case UP:
                     sendBallDirection = direction.UP;
-                    System.out.println("PHELLO");
                     break;
                 case DOWN:
                     sendBallDirection = direction.DOWN;
-                    System.out.println("DOWN");
                     break;
                 default:
                     sendBallDirection = direction.FRONT;
-
-                    System.out.println("FRONT");
                     break;
             }
         }
     }
 
     @Override
-    public void drawInField() { //to init
-        pos.move();
+    public void move() {
+        if(!haveBall){
+            pos.move();
+        }
+    }
+
+    @Override
+    public Picture drawInField(int x, int y,String imageURL) { //to init
+        Picture picture = new Picture(x, y, imageURL);
+        picture.draw();
+        return picture;
     }
 
 
