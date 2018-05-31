@@ -104,7 +104,7 @@ public class Game {
 
                 if (!player1.gethaveBall() && !player2.gethaveBall()) {
 
-                    ball.drawInField();
+                    ball.move();
 
                     collision.check();
 

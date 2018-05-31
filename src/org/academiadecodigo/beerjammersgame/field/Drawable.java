@@ -1,7 +1,9 @@
 package org.academiadecodigo.beerjammersgame.field;
 
+import org.academiadecodigo.simplegraphics.pictures.Picture;
+
 public interface Drawable {
 
-    void drawInField();
+    Picture drawInField(int x, int y, String imageURL);
 
 }
