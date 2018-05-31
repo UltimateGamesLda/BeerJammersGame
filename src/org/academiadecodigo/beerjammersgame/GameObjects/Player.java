@@ -16,6 +16,7 @@ public class Player extends GameObject implements Drawable {
     private Ball ball;
     private PlayerType player;
     private int maxX;
+    private int drinkedBeers;
     
     public Player(Field field, int x, PlayerType player, Ball ball, int playerMaxX) {
         this.field = field;
@@ -128,12 +129,24 @@ public class Player extends GameObject implements Drawable {
         }
     }
 
+    public void addDrinkedBeers(int ammount){
+        drinkedBeers += ammount;
+    }
+
+    public int getDrinkedBeers(){
+        return drinkedBeers;
+    }
+
     public PlayerType getPlayer() {
         return player;
     }
 
     public boolean gethaveBall(){
         return haveBall;
+    }
+
+    public void resetDrinkedBeers(){
+        drinkedBeers = 0;
     }
 
     public Position getPos() {

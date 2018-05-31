@@ -3,6 +3,7 @@ package org.academiadecodigo.beerjammersgame;
 import org.academiadecodigo.beerjammersgame.GameObjects.Ball;
 import org.academiadecodigo.beerjammersgame.GameObjects.Player;
 import org.academiadecodigo.beerjammersgame.field.Catch;
+import org.academiadecodigo.beerjammersgame.field.CheckGoal;
 import org.academiadecodigo.beerjammersgame.field.Collision;
 import org.academiadecodigo.beerjammersgame.field.Field;
 import org.academiadecodigo.beerjammersgame.keyboard.PlayerKeyboardHandler;
@@ -21,6 +22,7 @@ public class Game {
     private Field field;
     private Collision collision;
     private Catch catching;
+    private CheckGoal checkGoal;
     private int player1DrinkedBears;
     private int player2DrinkedBears;
     private int player1RoundsWin;
@@ -52,6 +54,7 @@ public class Game {
 
         this.catching = new Catch(player1, player2, ball, field);
         this.collision = new Collision(this.field, this.player1, this.player2, this.ball);
+        this.checkGoal = new CheckGoal(player1,player2, ball, collision, field);
         this.player2Score = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX + 100, (double) (Field.PADDINGX / 2) + 15, defaultScore);
         this.player1Score = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX - 100, (double) (Field.PADDINGX / 2) + 15, defaultScore);
         this.player1MaxBeer = new Text((double) (Field.PADDINGX / 3), (double) (Field.PADDINGY) + 10, Integer.toString(playersTYPE[0].getBeerCapacity()));
@@ -118,48 +121,6 @@ public class Game {
 
         playerWin();
     }
-    private void checkGoal() throws InterruptedException {
-
-        int previousplayer2DrinkedBears = player2DrinkedBears;
-        int previousplayer1DrinkedBears = player1DrinkedBears;
-
-
-            /** check if the ball touch in right limit*/
-            if (collision.getPlayer2Turn() && collision.hasGoal()) {
-
-                if (ball.getPos().getY() > field.getPaddingY() + 193 && ball.getPos().getY() < field.getPaddingY() + 387) {
-                    player2DrinkedBears += 5;
-                } else {
-                    player2DrinkedBears += 3;
-                }
-                System.out.println("Player 1 Goal");
-            }
-
-            /** check if the ball touch in left limit */
-            if (collision.getPlayer1Turn() && collision.hasGoal()) {
-
-                if (ball.getPos().getY() > field.getPaddingY() + 193 && ball.getPos().getY() < field.getPaddingY() + 387) {
-                    player1DrinkedBears += 5;
-                } else {
-                    player1DrinkedBears += 3;
-                }
-
-                System.out.println("Player 2 Goal");
-            }
-
-
-        if(player1DrinkedBears != previousplayer1DrinkedBears || player2DrinkedBears != previousplayer2DrinkedBears){
-            drink.play(true);
-            resetRound();
-        }
-
-        String p1Score = Integer.toString(player2DrinkedBears);
-        String p2Score = Integer.toString(player1DrinkedBears);
-
-        player1Score.setText(p1Score);
-        player2Score.setText(p2Score);
-
-    }
 
     private void resetRound() throws InterruptedException {
 
@@ -172,6 +133,21 @@ public class Game {
             ball.sendToPlayer();
             Thread.sleep(10);
             catching.checkCatch();
+        }
+    }
+
+    private void checkGoal() throws InterruptedException{
+
+        if(checkGoal.checkGoal()){
+            resetRound();
+
+            drink.play(true);
+
+            String p1Score = Integer.toString(player2.getDrinkedBeers());
+            String p2Score = Integer.toString(player1.getDrinkedBeers());
+
+            player1Score.setText(p1Score);
+            player2Score.setText(p2Score);
         }
     }
 
