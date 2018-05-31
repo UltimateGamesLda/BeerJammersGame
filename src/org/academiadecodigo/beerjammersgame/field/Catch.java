@@ -3,7 +3,7 @@ package org.academiadecodigo.beerjammersgame.field;
 import org.academiadecodigo.beerjammersgame.GameObjects.Ball;
 import org.academiadecodigo.beerjammersgame.GameObjects.Player;
 
-public class Catch {
+public class Catch implements Catchable {
     private Player player1;
     private Player player2;
     private Ball ball;
