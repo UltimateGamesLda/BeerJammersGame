@@ -22,6 +22,7 @@ public class Game {
     private CheckGoal checkGoal;
     private CheckWin checkWin;
     private Sound drink = new Sound("/resources/Drink.wav");
+    private Sound win = new Sound ("/resources/Win.wav");
     private Text player1Score;
     private Text player2Score;
     private Text player1MaxBeer;
@@ -49,22 +50,23 @@ public class Game {
         this.catching = new CheckCatch(player1, player2, ball, field);
         this.collision = new Collision(this.field, this.player1, this.player2, this.ball);
         this.checkGoal = new CheckGoal(player1,player2, ball, collision, field);
-        this.player2Score = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX + 100, (double) (Field.PADDINGX / 2) + 15, defaultScore);
-        this.player1Score = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX - 100, (double) (Field.PADDINGX / 2) + 15, defaultScore);
+
+        this.player1Score = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX - 110, (double) (Field.PADDINGX / 2) + 10, defaultScore);
+        this.player2Score = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX + 119, (double) (Field.PADDINGX / 2) + 10, defaultScore);
         this.player1MaxBeer = new Text((double) (Field.PADDINGX / 3), (double) (Field.PADDINGY) + 10, Integer.toString(playersTYPE[0].getBeerCapacity()));
         this.player2MaxBeer = new Text((double) (Field.PADDINGX / 2) + Field.WIDTH + Field.PADDINGX, (double) (Field.PADDINGY) + 10, Integer.toString(playersTYPE[1].getBeerCapacity()));
-        this.timerShow = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX - 10, (double) (Field.PADDINGX / 2) + 15, defaultScore);
+        this.timerShow = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX - 47, (double) (Field.PADDINGX / 2) - 3, defaultScore);
 
         timerShow.draw();
-        timerShow.grow(25, 25);
-        timerShow.setColor(Color.YELLOW);
+        timerShow.grow(0, 0);
+        timerShow.setColor(Color.YELLOW_GAME);
 
         player1Score.draw();
-        player1Score.grow(30, 30);
+        player1Score.grow(25, 25);
         player1Score.setColor(Color.RED);
 
         player2Score.draw();
-        player2Score.grow(30, 30);
+        player2Score.grow(25, 25);
         player2Score.setColor(Color.RED);
 
         player1MaxBeer.draw();
@@ -82,7 +84,7 @@ public class Game {
 
         while (player1.getRoundWins() != 2 && player2.getRoundWins() != 2) {
 
-            Chronometer gameTime = new Chronometer(60000);
+            Chronometer gameTime = new Chronometer(10000);
             gameTime.start();
 
             while (player1.getDrinkedBeers() < player1.getPlayer().getBeerCapacity() && player2.getDrinkedBeers() < player2.getPlayer().getBeerCapacity() && gameTime.getMsLeft() > 0) {
@@ -90,6 +92,10 @@ public class Game {
                 gameTime.tick();
 
                 timerShow.setText(gameTime.toString());
+
+                if (10000 > gameTime.getMsLeft()){
+                    timerShow.setText("0"+ gameTime.toString());
+                }
 
                 Thread.sleep(15);
 
@@ -133,6 +139,9 @@ public class Game {
 
     private void playerWin() throws InterruptedException {
 
+        menu.stopMusic();
+        win.play(true);
+
         checkWin.playerWin();
 
         ball.getPos().deletePicture();
@@ -169,7 +178,7 @@ public class Game {
     }
 
     public void deleteLastGame() {
-        menu.stopMusic();
+        win.stop();
         field.delete();
     }
 }
