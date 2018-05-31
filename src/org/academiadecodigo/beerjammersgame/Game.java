@@ -8,7 +8,6 @@ import org.academiadecodigo.beerjammersgame.GameObjects.PlayerType;
 import org.academiadecodigo.beerjammersgame.menu.Menu;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Text;
-import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Game {
 
@@ -21,6 +20,7 @@ public class Game {
     private CheckCatch catching;
     private CheckGoal checkGoal;
     private CheckWin checkWin;
+    private CheckWinRound checkWinRound;
     private Sound drink = new Sound("/resources/Drink.wav");
     private Sound win = new Sound ("/resources/Win.wav");
     private Sound startRound = new Sound("/resources/startNewRound.wav");
@@ -30,8 +30,6 @@ public class Game {
     private Text player2MaxBeer;
     private String defaultScore = "0";
     private Text timerShow;
-    private Picture finalShow;
-
 
     public Game() throws InterruptedException {
 
@@ -47,7 +45,8 @@ public class Game {
 
         new PlayerKeyboardHandler(this.player1, this.player2);
 
-        this.checkWin = new CheckWin(player1, player2, finalShow);
+        this.checkWin = new CheckWin(player1, player2);
+        this.checkWinRound = new CheckWinRound(player1, player2);
         this.catching = new CheckCatch(player1, player2, ball, field);
         this.collision = new Collision(this.field, this.player1, this.player2, this.ball);
         this.checkGoal = new CheckGoal(player1,player2, ball, collision, field);
@@ -134,9 +133,8 @@ public class Game {
 
     private void playerWinRound() throws InterruptedException {
 
-        checkWin.playerWinRound();
+        checkWinRound.check();
         resetRound();
-
 
     }
 
@@ -145,7 +143,7 @@ public class Game {
         menu.stopMusic();
         win.play(true);
 
-        checkWin.playerWin();
+        checkWin.check();
 
         ball.getPos().deletePicture();
         player1Score.delete();
