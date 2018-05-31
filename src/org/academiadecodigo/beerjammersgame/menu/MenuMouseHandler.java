@@ -1,6 +1,6 @@
 package org.academiadecodigo.beerjammersgame.menu;
 
-import org.academiadecodigo.beerjammersgame.objects.PlayerType;
+import org.academiadecodigo.beerjammersgame.GameObjects.PlayerType;
 import org.academiadecodigo.simplegraphics.mouse.*;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 

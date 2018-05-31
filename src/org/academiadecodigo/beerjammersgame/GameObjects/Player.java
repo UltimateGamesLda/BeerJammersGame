@@ -4,8 +4,6 @@ import org.academiadecodigo.beerjammersgame.field.Direction;
 import org.academiadecodigo.beerjammersgame.field.Drawable;
 import org.academiadecodigo.beerjammersgame.field.Field;
 import org.academiadecodigo.beerjammersgame.field.Position;
-import org.academiadecodigo.beerjammersgame.keyboard.PlayerKeyboardHandler;
-import org.academiadecodigo.beerjammersgame.objects.PlayerType;
 
 public class Player extends GameObject implements Drawable {
 

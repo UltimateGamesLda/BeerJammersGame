@@ -5,13 +5,15 @@ import org.academiadecodigo.beerjammersgame.GameObjects.Player;
 import org.academiadecodigo.beerjammersgame.field.Collision;
 import org.academiadecodigo.beerjammersgame.field.Field;
 import org.academiadecodigo.beerjammersgame.keyboard.PlayerKeyboardHandler;
-import org.academiadecodigo.beerjammersgame.objects.PlayerType;
+import org.academiadecodigo.beerjammersgame.GameObjects.PlayerType;
+import org.academiadecodigo.beerjammersgame.menu.Menu;
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Game {
 
+    private Menu menu;
     private Player player1;
     private Player player2;
     private Ball ball;
@@ -32,20 +34,25 @@ public class Game {
     private Picture finalShow;
 
 
-    public Game(PlayerType[] players) throws InterruptedException {
+    public Game() throws InterruptedException {
+
+        menu = new Menu();
+        PlayerType[] playersTYPE = menu.init();
 
         this.field = new Field();
+        field.drawInField();
+
         this.ball = new Ball(this.field, this.field.PADDINGX);
-        this.player1 = new Player(this.field, field.getXPlayer1(), players[0], ball, field.getPlayer1maxX());
-        this.player2 = new Player(this.field, field.getXPlayer2(), players[1], ball, field.getPlayer2maxX());
+        this.player1 = new Player(this.field, field.getXPlayer1(), playersTYPE[0], ball, field.getPlayer1maxX());
+        this.player2 = new Player(this.field, field.getXPlayer2(), playersTYPE[1], ball, field.getPlayer2maxX());
 
         new PlayerKeyboardHandler(this.player1, this.player2);
 
         this.collision = new Collision(this.field, this.player1, this.player2, this.ball);
         this.player1Score = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX - 100, (double) (Field.PADDINGX / 2) + 15, defaultScore);
         this.player2Score = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX + 100, (double) (Field.PADDINGX / 2) + 15, defaultScore);
-        this.player1MaxBeer = new Text((double) (Field.PADDINGX / 3), (double) (Field.PADDINGY) + 10, Integer.toString(players[0].getBeerCapacity()));
-        this.player2MaxBeer = new Text((double) (Field.PADDINGX / 2) + Field.WIDTH + Field.PADDINGX, (double) (Field.PADDINGY) + 10, Integer.toString(players[1].getBeerCapacity()));
+        this.player1MaxBeer = new Text((double) (Field.PADDINGX / 3), (double) (Field.PADDINGY) + 10, Integer.toString(playersTYPE[0].getBeerCapacity()));
+        this.player2MaxBeer = new Text((double) (Field.PADDINGX / 2) + Field.WIDTH + Field.PADDINGX, (double) (Field.PADDINGY) + 10, Integer.toString(playersTYPE[1].getBeerCapacity()));
         this.timerShow = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX - 10, (double) (Field.PADDINGX / 2) + 15, defaultScore);
 
         timerShow.draw();
@@ -69,6 +76,8 @@ public class Game {
         player2MaxBeer.setColor(Color.ORANGE);
 
     }
+
+
 
     public void start() throws InterruptedException {
 
@@ -268,5 +277,11 @@ public class Game {
         System.out.println("asdjkhjaklsd");
         Thread.sleep(5000);
         finalShow.delete();
+    }
+
+
+    public void deleteLastGame() {
+        menu.stopMusic();
+        field.delete();
     }
 }

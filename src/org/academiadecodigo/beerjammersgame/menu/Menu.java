@@ -1,7 +1,7 @@
 package org.academiadecodigo.beerjammersgame.menu;
 
 import org.academiadecodigo.beerjammersgame.Sound;
-import org.academiadecodigo.beerjammersgame.objects.PlayerType;
+import org.academiadecodigo.beerjammersgame.GameObjects.PlayerType;
 
 public class Menu {
 

@@ -1,8 +1,11 @@
 package org.academiadecodigo.beerjammersgame.field;
 
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Field {
+
+    private Picture fieldPicture;
 
     public static final int PADDINGX = 167;
     public static final int PADDINGY = 257;
@@ -23,6 +26,7 @@ public class Field {
     private int ballMaxY;
 
     public Field() {
+        this.fieldPicture = new Picture(10, 10, "./Field.png");
 
         this.goalSize = WIDTH / 16 ; //goals have one eight
         this.playerHeight = 150;
@@ -107,6 +111,15 @@ public class Field {
 
     public int getPlayer2maxX(){
         return player2maxX;
+    }
+
+    public void drawInField() {
+
+        fieldPicture.draw();
+    }
+
+    public void delete() {
+        fieldPicture.delete();
     }
 }
 

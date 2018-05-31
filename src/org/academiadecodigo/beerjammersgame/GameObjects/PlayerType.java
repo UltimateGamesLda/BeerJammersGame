@@ -1,4 +1,4 @@
-package org.academiadecodigo.beerjammersgame.objects;
+package org.academiadecodigo.beerjammersgame.GameObjects;
 
 public enum PlayerType {
 
