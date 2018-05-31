@@ -22,8 +22,8 @@ public class CheckCatch implements Checkcable {
         if (player1CheckX() && player1CheckY() && !player1.gethaveBall()) {
             System.out.println("Player 1 CheckCatch ball");
             player1.setHaveBall(true);
-            System.out.println((player1.getPos().getX() + field.getPlayerWidth() + 10));
-            ball.getPos().set((player1.getPos().getX() + field.getPlayerWidth() + 10), (player1.getPos().getY() + (field.getPlayerHeight() / 2)));
+            System.out.println("POSITION CATH "+(player1.getPos().getX() + field.getPlayerWidth() +10));
+            ball.getPos().set((player1.getPos().getX() + field.getPlayerWidth() +10), (player1.getPos().getY() + (field.getPlayerHeight() / 2)));
             return true;
         }
 
@@ -40,7 +40,7 @@ public class CheckCatch implements Checkcable {
 
     private boolean player1CheckX() {
 
-        if (ball.getPos().getX() + ball.getSize() > player1.getPos().getX() && ball.getPos().getX() + ball.getSize() < player1.getPos().getX() + field.getPlayerWidth()) {
+        if (ball.getPos().getX() + ball.getSize() > player1.getPos().getX()+10 && ball.getPos().getX() + ball.getSize() < player1.getPos().getX() + field.getPlayerWidth()) {
             return true;
         }
         return false;
@@ -56,7 +56,7 @@ public class CheckCatch implements Checkcable {
 
     private boolean player2CheckX() {
 
-        if (ball.getPos().getX() + ball.getSize() > player2.getPos().getX() && ball.getPos().getX() + ball.getSize() < player2.getPos().getX() + field.getPlayerWidth()) {
+        if (ball.getPos().getX() + ball.getSize() > player2.getPos().getX()+10 && ball.getPos().getX() + ball.getSize() < player2.getPos().getX() + field.getPlayerWidth()) {
             return true;
         }
             return false;

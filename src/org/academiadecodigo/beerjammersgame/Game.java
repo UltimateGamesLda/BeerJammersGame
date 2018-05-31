@@ -84,7 +84,7 @@ public class Game {
 
         while (player1.getRoundWins() != 2 && player2.getRoundWins() != 2) {
 
-            Chronometer gameTime = new Chronometer(10000);
+            Chronometer gameTime = new Chronometer(60000);
             gameTime.start();
             startRound.play(true);
 

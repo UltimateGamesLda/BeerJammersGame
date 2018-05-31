@@ -49,7 +49,6 @@ public class Player extends GameObject implements Drawable {
                     break;
                 case LEFT:
                     if (pos.getX() - velocity <= maxX) {
-                        
                         pos.setDistanceX(maxX - pos.getX());
                         break;
                     }
