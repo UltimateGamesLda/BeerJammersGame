@@ -8,7 +8,7 @@ import org.academiadecodigo.beerjammersgame.field.Position;
 import org.academiadecodigo.simplegraphics.graphics.*;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public class Ball implements Drawable, Movable {
+public class Ball extends GameObject implements Drawable, Movable {
     private Position pos;
     private Field field;
     private int velocity;
