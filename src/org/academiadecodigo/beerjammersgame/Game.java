@@ -153,6 +153,7 @@ public class Game {
         player2Score.delete();
         player1MaxBeer.delete();
         player2MaxBeer.delete();
+        timerShow.delete();
 
     }
 
