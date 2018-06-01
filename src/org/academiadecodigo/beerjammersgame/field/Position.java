@@ -9,10 +9,8 @@ public class Position {
     private int y;
     private int distanceX;
     private int distanceY;
-    private Field field;
 
-    public Position(Field field, int x, int y , Picture picture) {
-        this.field = field;
+    public Position(int x, int y , Picture picture) {
         this.x = x;
         this.y = y;
         this.distanceX = 0;

@@ -23,7 +23,7 @@ public class Player extends GameObject implements Drawable, Movable {
         this.player = player;
         this.ball = ball;
         this.maxX = playerMaxX;
-        pos = new Position(this.field, x ,field.getYPlayer(), drawInField(x, field.getYPlayer(), player.geturlImage()));
+        pos = new Position(x ,field.getYPlayer(), drawInField(x, field.getYPlayer(), player.geturlImage()));
     }
 
 

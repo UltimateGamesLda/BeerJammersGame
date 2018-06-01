@@ -4,15 +4,12 @@ import org.academiadecodigo.beerjammersgame.GameObjects.PlayerType;
 import org.academiadecodigo.simplegraphics.mouse.*;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-
-
 public class MenuMouseHandler implements MouseHandler {
-
-    //Rectangle initMenu = new Rectangle(50, 50, 50, 50);
 
     private Mouse m = new Mouse(this);
     private Picture initMenu = new Picture(10, 10, "./BeerJammersMenuInit.png");
     private Picture selectMenu = new Picture(10, 10, "./CodeCadetSelect.png");
+    private Picture controlMenu = new Picture(10, 10, "./ControlMenu.png");
     private Picture player1Logo = new Picture(1010, -10, "./Player1.png");
     private Picture player2Logo = new Picture(1010, -10, "./Player2.png");
     private PlayerType[] players = new PlayerType[2];
@@ -25,12 +22,11 @@ public class MenuMouseHandler implements MouseHandler {
     public MenuMouseHandler() {
 
         m.addEventListener(MouseEventType.MOUSE_CLICKED);
-        //m.addEventListener(MouseEventType.MOUSE_MOVED);
 
         initMenu.draw();
     }
 
-    public PlayerType[] start(){
+    public PlayerType[] start() throws InterruptedException {
 
         Boolean end = false;
 
@@ -48,6 +44,9 @@ public class MenuMouseHandler implements MouseHandler {
 
             if (x >= 520 && x <= 980 && y >= (730) && y <= (890) && menu == false) {
                 System.out.println("You press Controls Menu");
+                controlMenu.draw();
+                Thread.sleep(5000);
+                controlMenu.delete();
                 reset();
             }
 
@@ -66,7 +65,6 @@ public class MenuMouseHandler implements MouseHandler {
                         selectMenu.delete();
 
                         m.removeEventListener(MouseEventType.MOUSE_CLICKED);
-                        //m.removeEventListener(MouseEventType.MOUSE_MOVED);
 
                         end = true;
                     }
@@ -146,8 +144,6 @@ public class MenuMouseHandler implements MouseHandler {
     }
 
     @Override
-    public void mouseMoved (MouseEvent e){
-        //System.out.println(e);
-    }
+    public void mouseMoved (MouseEvent e){}
 
 }

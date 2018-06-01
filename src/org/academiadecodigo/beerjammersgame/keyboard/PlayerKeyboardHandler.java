@@ -11,7 +11,6 @@ public class PlayerKeyboardHandler implements KeyboardHandler {
     private Player player1;
     private Player player2;
 
-
     public PlayerKeyboardHandler(Player player1, Player player2){
 
         this.player1 = player1;
@@ -48,7 +47,6 @@ public class PlayerKeyboardHandler implements KeyboardHandler {
         event.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         event.setKey(KeyboardEvent.KEY_W);
         keyboard.addEventListener(event);
-
 
         event = new KeyboardEvent();
         event.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
@@ -115,11 +113,7 @@ public class PlayerKeyboardHandler implements KeyboardHandler {
                 break;
 
         }
-
     }
-
-
-
 
     @Override
     public void keyReleased(KeyboardEvent event) {

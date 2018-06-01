@@ -48,7 +48,7 @@ public class Game {
         this.checkWin = new CheckWin(player1, player2);
         this.checkWinRound = new CheckWinRound(player1, player2);
         this.catching = new CheckCatch(player1, player2, ball, field);
-        this.collision = new Collision(this.field, this.player1, this.player2, this.ball);
+        this.collision = new Collision(this.field, this.ball);
         this.checkGoal = new CheckGoal(player1,player2, ball, collision, field);
 
         this.player1Score = new Text((double) ((Field.WIDTH) / 2) + Field.PADDINGX - 128, (double) (Field.PADDINGX / 2) + 10, defaultScore);

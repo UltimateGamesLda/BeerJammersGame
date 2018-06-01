@@ -7,7 +7,7 @@ public class Menu {
 
     private Sound song = new Sound("/resources/GameSong.wav");
 
-    public PlayerType[] init(){
+    public PlayerType[] init() throws InterruptedException {
 
         song.play(true);
 

@@ -23,7 +23,7 @@ public class Ball implements Drawable, Movable {
         this.velocity = 10;
         this.size = 40;
 
-        pos = new Position(this.field,Field.PADDINGX + (Field.WIDTH / 2), Field.PADDINGY + Field.HEIGHT - 300,
+        pos = new Position(Field.PADDINGX + (Field.WIDTH / 2), Field.PADDINGY + Field.HEIGHT - 300,
                 drawInField(Field.PADDINGX + (Field.WIDTH / 2), Field.PADDINGY + Field.HEIGHT - 300, ballURL));
 
         this.vertDirection = Direction.DOWN;

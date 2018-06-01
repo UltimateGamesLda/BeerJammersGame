@@ -5,21 +5,16 @@ import org.academiadecodigo.beerjammersgame.GameObjects.Player;
 
 public class Collision {
     private Field field;
-    private Player player1;
-    private Player player2;
+
     private Ball ball;
     private boolean player1Turn;
     private boolean player2Turn;
-    private boolean goal;
 
-    public Collision(Field field, Player player1, Player player2, Ball ball){
+    public Collision(Field field, Ball ball){
         this.field = field;
-        this.player1 = player1;
-        this.player2 = player2;
         this.ball = ball;
-        this.player1Turn =false;
-        this.player2Turn =false;
-        this.goal=false;
+        this.player1Turn = false;
+        this.player2Turn = false;
     }
 
     public void check(){

@@ -19,7 +19,6 @@ public class Field {
     private int playerMaxX;
     private int playerMaxY;
 
-    private Rectangle border;
     private int ballHeight;
     private int ballWidth;
     private int ballMaxX;

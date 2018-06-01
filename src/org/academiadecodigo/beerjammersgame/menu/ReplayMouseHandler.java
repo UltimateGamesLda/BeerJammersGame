@@ -43,8 +43,7 @@ public class ReplayMouseHandler implements MouseHandler {
         m.removeEventListener(MouseEventType.MOUSE_CLICKED);
         choiceMenu.delete();
     }
-
-
+    
     @Override
     public void mouseClicked(MouseEvent e) {
         x = (int) e.getX();
